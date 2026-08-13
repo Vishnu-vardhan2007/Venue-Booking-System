@@ -1,6 +1,5 @@
 # **CS 201 - Object Oriented Design, Analysis and Programming**
 
-## **Assignment 01 - Problem Statement**
 
 ### **Project Title**
 
