@@ -1,0 +1,47 @@
+@startuml
+
+object "customer1 : Customer" as customer1 {
+    customerId = 101
+    name = "Rohit Sharma"
+    email = "rohit@gmail.com"
+    phone = "9876543210"
+    password = "rohit123"
+}
+
+object "owner1 : VenueOwner" as owner1 {
+    ownerId = 201
+    name = "Amit Patel"
+    email = "amit@gmail.com"
+    phone = "9123456780"
+    password = "amit123"
+}
+
+object "venue1 : Venue" as venue1 {
+    venueId = 301
+    name = "Sunshine Banquet Hall"
+    location = "Ahmedabad"
+    type = "Banquet Hall"
+    capacity = 500
+    price = 50000.0
+    availability = true
+}
+
+object "booking1 : Booking" as booking1 {
+    bookingId = 501
+    bookingDate = "25-08-2026"
+    status = "Confirmed"
+}
+
+'================ RELATIONSHIPS ================
+
+customer1 --> venue1 : searches
+customer1 --> owner1 : views details
+customer1 --> booking1 : makes
+customer1 --> booking1 : views history
+
+owner1 --> venue1 : manages
+owner1 --> booking1 : manages status
+
+venue1 --> booking1 : has
+
+@enduml
