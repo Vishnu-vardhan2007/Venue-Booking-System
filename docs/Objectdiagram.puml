@@ -32,7 +32,6 @@ object "booking1 : Booking" as booking1 {
     status = "Confirmed"
 }
 
-'================ RELATIONSHIPS ================
 
 customer1 --> venue1 : searches
 customer1 --> owner1 : views details
