@@ -2,28 +2,81 @@
 left to right direction
 
 skinparam packageStyle rectangle
+skinparam usecase {
+    BackgroundColor #FFF2CC
+    BorderColor #C9A227
+    ArrowColor black
+}
 
 actor Customer
-actor "Venue Owner" as VenueOwner
+actor "Venue Owner" as Owner
 actor Admin
 
-rectangle "Venue Booking System" {
+rectangle "VENUE BOOKING SYSTEM" {
 
-  package "Customer Functions" {
-    usecase "Register/Login" as UC1
-    usecase "Search Venues" as UC2
-    usecase "Filter Venues" as UC3
-    usecase "View Venue Details" as UC4
-    usecase "View Facilities & Pricing" as UC5
-    usecase "Check Availability" as UC6
-    usecase "Contact Venue Owner" as UC7
-    usecase "View Owner Details" as UC8
-    usecase "Select Date & Time" as UC9
-    usecase "Confirm Booking" as UC10
-  }
+    '================ CUSTOMER =================
+    usecase "Register/Login" as C1
+    usecase "Search Venues" as C2
+    usecase "Filter Venues" as C3
+    usecase "View Venue Details" as C4
+    usecase "View Facilities\n&Pricing" as C5
+    usecase "Check Availability" as C6
+    usecase "Contact Venue\nOwner" as C7
+    usecase "View Owner\nDetails" as C8
 
-  package "Owner Functions" {
-    usecase "Register/Login" as UC11
+    usecase "Select Date &\nTime" as C9
+    usecase "Confirm Booking" as C10
+    usecase "Booking History" as C11
+    usecase "Booking\nNotifications" as C12
+
+    '================ VENUE OWNER =================
+    usecase "Register/Login" as O1
+    usecase "Add/Manage\nVenues" as O2
+    usecase "View Bookings" as O3
+    usecase "Update Availability" as O4
+    usecase "Update Booking\nStatus" as O5
+
+    '================ ADMIN =================
+    usecase "Manage Users" as A1
+    usecase "Approve/Reject\nVenues" as A2
+    usecase "Manage all\nBookings" as A3
+}
+
+'================ CUSTOMER ASSOCIATIONS =================
+Customer --> C1
+Customer --> C2
+Customer --> C4
+Customer --> C6
+Customer --> C7
+Customer --> C9
+Customer --> C10
+Customer --> C11
+Customer --> C12
+
+C2 ..> C3 : <<include>>
+C4 ..> C5 : <<include>>
+C7 ..> C8 : <<include>>
+
+C10 ..> C9 : <<include>>
+C10 ..> C12 : <<include>>
+
+C11 ..> C10 : <<extend>>
+
+'================ VENUE OWNER ASSOCIATIONS =================
+Owner --> O1
+Owner --> O2
+Owner --> O3
+Owner --> O4
+Owner --> O5
+
+O5 ..> C12 : <<include>>
+
+'================ ADMIN ASSOCIATIONS =================
+Admin --> A1
+Admin --> A2
+Admin --> A3
+
+@enduml
     usecase "Add/Manage Venues" as UC12
     usecase "View Bookings" as UC13
     usecase "Update Availability" as UC14
