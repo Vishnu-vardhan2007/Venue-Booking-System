@@ -1,0 +1,20 @@
+@startuml
+
+object "Bhanu : Customer" as Bhanu {
+    userId = 101
+    name = "Bhanu"
+    email = "rohit@example.com"
+}
+
+object "sunshineHall : Venue" as venue1 {
+    venueId = 501
+    name = "Sunshine Banquet Hall"
+    location = "Ahmedabad"
+    type = "Banquet Hall"
+    capacity = 500
+    price = 50000.0
+}
+
+Bhanu --> venue1 : searches
+
+@enduml
