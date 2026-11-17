@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venue Details | VenueVerse</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="venue-details.css">
+</head>
+<body class="venue-details-body">
+
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      
+      <a href="../index.html" class="brand-logo" aria-label="VenueVerse Home">
+        <span class="logo-icon-wrap">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18"/>
+            <path d="M5 21V7l8-4v18"/>
+            <path d="M19 21V11l-6-4"/>
+            <path d="M9 9h1"/>
+            <path d="M9 13h1"/>
+            <path d="M9 17h1"/>
+          </svg>
+        </span>
+        <span class="brand-text">Venue<span class="brand-accent">Verse</span></span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="../venues/venues.html" class="nav-link active">Venues</a></li>
+          <li><a href="../index.html#categories" class="nav-link">Categories</a></li>
+          <li><a href="../index.html#how-it-works" class="nav-link">How It Works</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button type="button" class="btn btn-outline" id="myBookingsNavBtn" style="display:inline-flex; align-items:center;">
+            <span>My Bookings</span>
+            <span class="bookings-badge-count" id="myBookingsCountBadge">0</span>
+          </button>
+          <a href="../signin/signin.html" class="btn btn-primary">Sign In</a>
+        </div>
+      </nav>
+
+    </div>
+  </header>
+
+  <div class="breadcrumbs-bar">
+    <div class="container">
+      <nav class="breadcrumbs-trail" aria-label="Breadcrumb">
+        <a href="../index.html" class="crumb-link">Home</a>
+        <span class="crumb-sep">/</span>
+        <a href="../venues/venues.html" class="crumb-link">Venues</a>
+        <span class="crumb-sep">/</span>
+        <a href="../venues/venues.html?category=all" class="crumb-link" id="bcCategoryLink">All Venues</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current" id="bcVenueTitle">Venue Details</span>
+      </nav>
+    </div>
+  </div>
+
+  <main class="venue-page-wrapper">
+    <div class="container">
+
+      <div class="listing-header-row">
+        <div class="listing-title-block">
+          <h1 class="listing-title" id="venueTitle">Sunset Rooftop</h1>
+          <div class="listing-meta-row">
+            <span class="listing-rating">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="star-svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <strong id="venueRatingScore">No rating</strong>
+              <span class="reviews-count-text" id="venueReviewsCount">(0 reviews)</span>
+            </span>
+            <span class="meta-dot">&bull;</span>
+            <span class="superhost-tag">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>Superhost</span>
+            </span>
+            <span class="meta-dot">&bull;</span>
+            <a href="#locationSection" class="listing-location-link" id="venueLocationText">Gandhinagar, Gujarat, India</a>
+          </div>
+        </div>
+
+        <div class="listing-actions">
+          <button type="button" class="btn-action-pill" id="shareBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span>Share</span>
+          </button>
+          <button type="button" class="btn-action-pill" id="saveBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span>Save</span>
+          </button>
+        </div>
+      </div>
+
+      <section class="gallery-wrapper" aria-label="Photo gallery">
+        <div class="gallery-mosaic">
+          <div class="mosaic-item mosaic-item-lead">
+            <img id="galleryLeadPhoto" src="../assets/venue-glasshouse.jpg" alt="Main venue photo" class="mosaic-photo">
+          </div>
+          <div class="mosaic-item">
+            <img id="galleryPhoto2" src="../assets/venue-skyline.jpg" alt="Skyline and outdoor deck" class="mosaic-photo">
+          </div>
+          <div class="mosaic-item">
+            <img id="galleryPhoto3" src="../assets/venue-dining.jpg" alt="Banquet dining hall" class="mosaic-photo">
+          </div>
+          <div class="mosaic-item">
+            <img id="galleryPhoto4" src="../assets/venue-ballroom.jpg" alt="Ballroom interior" class="mosaic-photo">
+          </div>
+          <div class="mosaic-item mosaic-item-last">
+            <img id="galleryPhoto5" src="../assets/hero-venue.jpg" alt="Evening garden lawn" class="mosaic-photo">
+            <button type="button" class="btn-show-all-photos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+              <span>Show all 24 photos</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="listing-main-layout">
+
+        <div class="listing-content-col">
+
+          <div class="host-profile-row">
+            <div class="host-info-text">
+              <h2 class="host-title" id="hostTitle">Entire event venue hosted by Bhavik Patel</h2>
+              <p class="host-specs" id="hostSpecs">Up to 300 guests &bull; 2 banquet halls &bull; Open-air lawn &bull; 150 parking spaces</p>
+            </div>
+            <div class="host-avatar-wrap">
+              <div class="host-avatar-circle" id="hostAvatar">BP</div>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <div class="highlights-list">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+              <div class="highlight-text">
+                <strong>Verified Event Host</strong>
+                <span>Verified partner venue with transparent pricing and instant booking confirmation.</span>
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="highlight-text">
+                <strong id="locationHighlightTitle">No rating</strong>
+                <span id="locationHighlightSubtitle">No reviews yet for this venue. Ratings update after every review.</span>
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+              </div>
+              <div class="highlight-text">
+                <strong>Free valet parking on premises</strong>
+                <span>Dedicated on-site parking crew included for all guest vehicles.</span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <section class="content-section">
+            <h2 class="content-section-title">About this space</h2>
+            <div class="about-text-body" id="venueDescriptionText">
+              <p>Welcome to Riverside Resort, one of Gandhinagar's most sought-after event destinations. Nestled alongside scenic waters, this sprawling estate offers open manicured lawns, a chic poolside celebration deck, and climate-controlled banquet halls equipped for private birthdays, family celebrations, and grand banquets.</p>
+              <p>The space features modern mood lighting, acoustic sound damping, comfortable bridal/guest changing rooms, and a dedicated team of venue coordinators ready to assist with your catering and stage setup from start to finish.</p>
+            </div>
+          </section>
+
+          <hr class="section-divider">
+
+          <section class="content-section">
+            <h2 class="content-section-title">What this place offers</h2>
+            
+            <div class="amenities-two-col-grid" id="amenitiesGrid">
+              <div class="amenity-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="amenity-svg"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                <span>Fast Wi-Fi (Gigabit fiber coverage)</span>
+              </div>
+
+              <div class="amenity-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="amenity-svg"><rect width="20" height="12" x="2" y="6" rx="2"/><path d="M6 18v2"/><path d="M18 18v2"/><path d="M6 10h12"/></svg>
+                <span>Central air conditioning &amp; climate control</span>
+              </div>
+
+              <div class="amenity-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="amenity-svg"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+                <span>Free valet parking on premises (150+ cars)</span>
+              </div>
+
+              <div class="amenity-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="amenity-svg"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                <span>Commercial kitchen &amp; in-house catering setup</span>
+              </div>
+
+              <div class="amenity-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="amenity-svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>Stage &amp; architectural ambience illumination</span>
+              </div>
+
+              <div class="amenity-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="amenity-svg"><path d="M2 12h20"/><path d="M2 16h20"/><path d="M2 20h20"/><path d="M6 4v8"/><path d="M18 4v8"/></svg>
+                <span>Swimming pool &amp; open-air cabana decks</span>
+              </div>
+
+              <div class="amenity-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="amenity-svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <span>100% DG generator power backup</span>
+              </div>
+
+              <div class="amenity-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="amenity-svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>24/7 on-site security &amp; CCTV coverage</span>
+              </div>
+            </div>
+          </section>
+
+          <hr class="section-divider">
+
+          <section class="content-section">
+            <h2 class="content-section-title">Things to know</h2>
+            
+            <div class="policies-three-col-grid">
+              <div class="policy-column">
+                <h3 class="policy-heading">Event hours</h3>
+                <p>Check-in: 09:00 AM</p>
+                <p>Event wrap-up: 11:30 PM</p>
+                <p>Overnight setup allowed on request</p>
+              </div>
+
+              <div class="policy-column">
+                <h3 class="policy-heading">Sound &amp; decor rules</h3>
+                <p>Outdoor music until 10:30 PM</p>
+                <p>No permanent wall nails or fixtures</p>
+                <p>Eco-friendly confetti permitted</p>
+              </div>
+
+              <div class="policy-column">
+                <h3 class="policy-heading">Cancellation policy</h3>
+                <p>Free cancellation up to 7 days before event.</p>
+                <p>Review the host's full cancellation policy before reserving.</p>
+              </div>
+            </div>
+          </section>
+
+          <hr class="section-divider">
+
+          <section class="content-section" id="reviewsSection">
+            <div class="reviews-title-row">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="star-svg-large"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <h2 class="content-section-title" id="reviewsHeaderTitle">No rating &bull; 0 reviews</h2>
+            </div>
+
+            <div class="add-review-card" id="venueAddReviewCard" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:14px; padding:18px 20px; margin-bottom:20px;">
+              <h3 style="margin:0 0 10px; font-size:1rem; font-weight:700; color:#0f172a;">Leave a Review</h3>
+              <form id="venueReviewForm">
+                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
+                  <span style="font-size:0.86rem; font-weight:600; color:#475569;">Your Rating:</span>
+                  <div id="reviewStarPicker" style="display:inline-flex; gap:4px;">
+                    <button type="button" class="star-pick-btn" data-rating="1" aria-label="1 star" style="background:none;border:none;font-size:1.35rem;cursor:pointer;color:#f59e0b;">★</button>
+                    <button type="button" class="star-pick-btn" data-rating="2" aria-label="2 stars" style="background:none;border:none;font-size:1.35rem;cursor:pointer;color:#f59e0b;">★</button>
+                    <button type="button" class="star-pick-btn" data-rating="3" aria-label="3 stars" style="background:none;border:none;font-size:1.35rem;cursor:pointer;color:#f59e0b;">★</button>
+                    <button type="button" class="star-pick-btn" data-rating="4" aria-label="4 stars" style="background:none;border:none;font-size:1.35rem;cursor:pointer;color:#f59e0b;">★</button>
+                    <button type="button" class="star-pick-btn" data-rating="5" aria-label="5 stars" style="background:none;border:none;font-size:1.35rem;cursor:pointer;color:#f59e0b;">★</button>
+                  </div>
+                  <span id="selectedRatingLabel" style="font-size:0.84rem; font-weight:600; color:#0f172a;">5 / 5 Stars</span>
+                  <input type="hidden" id="reviewRatingInput" value="5">
+                </div>
+                <textarea id="venueReviewComment" rows="3" placeholder="Share your experience with this venue..." required style="width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #cbd5e1; border-radius:10px; font-family:inherit; font-size:0.9rem; resize:vertical; margin-bottom:10px;"></textarea>
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                  <button type="submit" id="btnSubmitVenueReview" style="padding:10px 18px; border:none; border-radius:10px; background:#2563eb; color:#ffffff; font-weight:600; font-size:0.88rem; cursor:pointer;">Submit Review</button>
+                  <span id="venueReviewStatusMsg" style="font-size:0.84rem; color:#64748b;"></span>
+                </div>
+              </form>
+            </div>
+
+            <div class="reviews-cards-grid" id="reviewsCardsGrid">
+              <p style="color:#64748b; grid-column: 1 / -1; margin: 8px 0;">Loading reviews...</p>
+            </div>
+          </section>
+
+          <hr class="section-divider">
+
+          <section class="content-section" id="locationSection">
+            <h2 class="content-section-title">Where you'll be</h2>
+            <p class="location-neighborhood-desc" id="venueAddressDetail">Gandhinagar, Gujarat &bull; Quiet, scenic green belt with broad multi-lane approach roads.</p>
+            <div class="leaflet-map-wrapper" id="venueDetailMap"></div>
+          </section>
+
+        </div>
+
+        <aside class="listing-sidebar-col">
+          <div class="sticky-card">
+            
+            <div class="sticky-card-header">
+              <div class="sticky-rate-wrap">
+                <span class="rate-currency">₹</span>
+                <span class="rate-value" id="cardPriceValue">18,000</span>
+                <span class="rate-duration">/ day</span>
+              </div>
+              <div class="sticky-rating-pill">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="star-svg-small"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span id="cardRatingScore">No rating</span>
+                <span class="card-reviews-count" id="cardReviewsCount">&bull; 0 reviews</span>
+              </div>
+            </div>
+
+            <div class="booking-selector-box">
+              <div class="selector-field field-date">
+                <label for="bookingDateInput">EVENT DATE</label>
+                <input type="date" id="bookingDateInput" required>
+              </div>
+              <div class="selector-field field-event-type">
+                <label for="bookingEventTypeSelect">EVENT TYPE (SELECT ONE)</label>
+                <select id="bookingEventTypeSelect" required>
+                  <option value="wedding">Wedding</option>
+                </select>
+              </div>
+              <div class="selector-field field-guests">
+                <label for="bookingGuestsInput">GUESTS</label>
+                <div class="stepper-wrap">
+                  <button type="button" class="btn-stepper" id="btnMinusGuest" aria-label="Decrease guests">&minus;</button>
+                  <input type="number" id="bookingGuestsInput" value="100" min="10" step="10">
+                  <button type="button" class="btn-stepper" id="btnPlusGuest" aria-label="Increase guests">&plus;</button>
+                </div>
+                <small id="guestLimitWarning" style="display:none; color:#dc2626; font-size:0.76rem; font-weight:600; margin-top:4px;"></small>
+              </div>
+            </div>
+
+            <div class="availability-badge available" id="availabilityPill">
+              <span class="dot-indicator">●</span>
+              <span id="availabilityText">Available for reservation</span>
+            </div>
+
+            <button type="button" class="btn-primary-reserve" id="btnReserveVenue">
+              <span>Reserve</span>
+            </button>
+
+            <p class="reassurance-text">You won't be charged yet</p>
+
+            <div class="pricing-breakdown-list">
+              <div class="breakdown-line">
+                <span id="breakdownBaseLabel">₹0 &times; 1 day</span>
+                <span id="breakdownBaseVal">₹0</span>
+              </div>
+              <div class="breakdown-line" style="color:#64748b; font-size:0.84rem;">
+                <span>Taxes &amp; Extra Fees</span>
+                <span>None (₹0)</span>
+              </div>
+              
+              <div class="breakdown-separator"></div>
+
+              <div class="breakdown-total-line">
+                <span>Total payable</span>
+                <span class="total-bold-price" id="breakdownTotalVal">₹0</span>
+              </div>
+            </div>
+
+            <div class="response-badge-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#16a34a;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>Instant booking confirmation</span>
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-bottom-row">
+        <p class="copyright-text">&copy; 2026 VenueVerse. All rights reserved.</p>
+        <p class="project-credit-text">College Web Project &bull; Built with Semantic HTML5, CSS3 &amp; Object-Oriented JavaScript</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script src="../oop/models.js"></script>
+  <script src="../oop/services.js"></script>
+
+  <script src="venue-details.js"></script>
+  <script src="../auth-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm &amp; book | VenueVerse</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="checkout.css">
+</head>
+<body class="checkout-page-body">
+
+  <header class="checkout-header">
+    <div class="checkout-header-inner">
+      <a href="javascript:history.back()" class="btn-back-arrow" id="backBtn" aria-label="Go back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </a>
+      <h1 class="checkout-page-title">Confirm &amp; book</h1>
+    </div>
+  </header>
+
+  <main class="checkout-main-container">
+    <div class="checkout-layout-grid">
+
+      <div class="checkout-steps-column">
+
+        <section class="step-card is-active" id="step1Card">
+          <div class="step-card-header" id="step1Header">
+            <div class="step-title-wrap">
+              <span class="step-number-tag" id="step1Status">1</span>
+              <h2 class="step-heading">Write a message to the host</h2>
+            </div>
+            <button type="button" class="btn-edit-step" id="editStep1Btn" style="display:none;">Edit</button>
+          </div>
+
+          <div class="step-card-body" id="step1Body">
+            <p class="step-desc-text" id="hostMessageDesc">
+              Share a quick note with the host about your event schedule, setup preferences, or special requirements.
+            </p>
+
+            <div class="host-profile-snippet">
+              <div class="host-avatar-circle" id="checkoutHostAvatar">VH</div>
+              <div class="host-snippet-info">
+                <strong id="checkoutHostName">Verified Host</strong>
+                <span id="checkoutHostSince">Instant confirmation &bull; Direct booking</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <textarea 
+                id="hostMessageText" 
+                class="checkout-textarea" 
+                rows="4" 
+                placeholder="Example: Hi Bhavik, we're hosting a family celebration for 80 guests. We loved your space and want to confirm catering and decor timings..."
+                required
+              ></textarea>
+              <span class="field-error-msg" id="step1Error" style="display:none;">Please enter a brief note for the host before proceeding.</span>
+            </div>
+
+            <div class="step-action-row">
+              <button type="button" class="btn-step-next" id="btnNextStep1">
+                <span>Next</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="step-completed-summary" id="step1Summary" style="display:none;">
+            <p class="summary-preview-text" id="step1PreviewText">Message added for host</p>
+          </div>
+        </section>
+
+        <section class="step-card is-collapsed" id="step2Card">
+          <div class="step-card-header" id="step2Header">
+            <div class="step-title-wrap">
+              <span class="step-number-tag" id="step2Status">2</span>
+              <h2 class="step-heading">Contact details &amp; event info</h2>
+            </div>
+            <button type="button" class="btn-edit-step" id="editStep2Btn" style="display:none;">Edit</button>
+          </div>
+
+          <div class="step-card-body" id="step2Body" style="display:none;">
+            <p class="step-desc-text">
+              We'll use these details to send your reservation confirmation, invoice receipt, and gate pass.
+            </p>
+
+            <div class="form-grid-two">
+              <div class="form-group">
+                <label for="organizerName" class="input-label">Full Name</label>
+                <input type="text" id="organizerName" class="checkout-input" placeholder="Your full name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="organizerPhone" class="input-label">Phone Number</label>
+                <input type="tel" id="organizerPhone" class="checkout-input" placeholder="+91 98765 43210" required>
+              </div>
+            </div>
+
+            <div class="form-grid-two">
+              <div class="form-group">
+                <label for="organizerEmail" class="input-label">Email Address</label>
+                <input type="email" id="organizerEmail" class="checkout-input" placeholder="name@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="eventOccasion" class="input-label">Event Type (Select One)</label>
+                <select id="eventOccasion" class="checkout-select" required>
+                  <option value="wedding">Wedding</option>
+                </select>
+              </div>
+            </div>
+
+            <span class="field-error-msg" id="step2Error" style="display:none;">Please ensure all contact fields are filled properly.</span>
+
+            <div class="step-action-row">
+              <button type="button" class="btn-step-next" id="btnNextStep2">
+                <span>Next</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="step-completed-summary" id="step2Summary" style="display:none;">
+            <p class="summary-preview-text" id="step2PreviewText">Contact info &bull; Verified</p>
+          </div>
+        </section>
+
+        <section class="step-card is-collapsed" id="step3Card">
+          <div class="step-card-header" id="step3Header">
+            <div class="step-title-wrap">
+              <span class="step-number-tag" id="step3Status">3</span>
+              <h2 class="step-heading">Confirm &amp; pay</h2>
+            </div>
+          </div>
+
+          <div class="step-card-body" id="step3Body" style="display:none;">
+            <p class="step-desc-text">
+              Choose your preferred payment method. Your reservation is confirmed immediately with instant booking.
+            </p>
+
+            <div class="payment-methods-stack">
+              
+              <label class="payment-method-tile is-selected" id="payMethodUpiLabel">
+                <input type="radio" name="payMethod" value="upi" checked>
+                <div class="tile-content">
+                  <div class="tile-title-row">
+                    <strong>UPI (Google Pay, PhonePe, Paytm)</strong>
+                    <span class="badge-instant">Fastest</span>
+                  </div>
+                  <span class="tile-sub">Pay directly from any UPI app without transaction fees</span>
+                  <div class="upi-input-wrap" id="upiInputBox">
+                    <input type="text" id="upiIdInput" class="checkout-input" placeholder="username@okhdfcbank">
+                  </div>
+                </div>
+              </label>
+
+              <label class="payment-method-tile" id="payMethodCardLabel">
+                <input type="radio" name="payMethod" value="card">
+                <div class="tile-content">
+                  <div class="tile-title-row">
+                    <strong>Credit or Debit Card</strong>
+                    <span class="cards-icons">💳 Visa &bull; Mastercard &bull; RuPay</span>
+                  </div>
+                  <span class="tile-sub">Safe 256-bit encrypted card processing</span>
+                </div>
+              </label>
+
+              <label class="payment-method-tile" id="payMethodNetBankingLabel">
+                <input type="radio" name="payMethod" value="netbanking">
+                <div class="tile-content">
+                  <div class="tile-title-row">
+                    <strong>Net Banking / Corporate Transfer</strong>
+                  </div>
+                  <span class="tile-sub">All major banks supported (HDFC, ICICI, SBI, Axis)</span>
+                </div>
+              </label>
+
+            </div>
+
+            <div class="checkout-policies-box">
+              <h3 class="policies-mini-title">Cancellation Policy</h3>
+              <p>Free cancellation within 48 hours of booking. Receive a 100% refund if cancelled at least 7 days before event start.</p>
+            </div>
+
+            <label class="agreement-checkbox-label">
+              <input type="checkbox" id="agreementCheckbox" checked>
+              <span>I agree to the VenueVerse Terms of Service, Host House Rules, and Cancellation Policy.</span>
+            </label>
+
+            <span class="field-error-msg" id="step3Error" style="display:none;">Please agree to the venue terms before requesting.</span>
+
+            <div class="step-action-row">
+              <button type="button" class="btn-step-submit" id="btnSubmitBooking">
+                <span id="btnSubmitLabel">Confirm &amp; Book</span>
+              </button>
+            </div>
+
+            <p class="final-reassurance-note">
+              🔒 256-bit SSL encrypted &bull; Handled by VenueVerse Secure Booking Engine
+            </p>
+          </div>
+        </section>
+
+        <section class="booking-success-card" id="bookingSuccessCard" style="display:none;">
+          <div class="success-icon-badge">✓</div>
+          <h2 class="success-title">Your booking is confirmed!</h2>
+          <p class="success-subtitle">
+            Your venue reservation has been confirmed immediately in VenueVerse. No owner approval is needed.
+          </p>
+
+          <div class="success-receipt-box">
+            <div class="receipt-row">
+              <span>Booking Reference:</span>
+              <strong id="receiptBookingId">BK-XXXXXXXX</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Venue:</span>
+              <strong id="receiptVenueTitle">Sunset Rooftop</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Event Type:</span>
+              <strong id="receiptEventType">Event</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Date:</span>
+              <strong id="receiptDate">23 Nov 2026</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Guests:</span>
+              <strong id="receiptGuests">100 Guests</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Total Paid / Due:</span>
+              <strong id="receiptTotalAmount">₹16,200</strong>
+            </div>
+          </div>
+
+          <div class="success-action-buttons">
+            <a href="../venues/venues.html" class="btn btn-primary" id="btnViewMyBookings">View My Bookings</a>
+            <a href="../index.html" class="btn btn-outline">Return to Home</a>
+          </div>
+        </section>
+
+      </div>
+
+      <aside class="checkout-summary-column">
+        <div class="summary-card-sticky">
+          
+          <div class="summary-venue-header">
+            <img id="summaryVenueImg" src="../assets/venue-skyline.jpg" alt="Venue photo" class="summary-venue-thumbnail">
+            <div class="summary-venue-info">
+              <span class="venue-cat-chip" id="summaryCategoryText">Birthday Venue</span>
+              <h2 class="summary-venue-title" id="summaryVenueTitle">Sunset Rooftop</h2>
+              <div class="summary-rating-line">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="star-mini"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <strong id="summaryRatingScore">No rating</strong>
+                <span id="summaryReviewsCount">(0)</span>
+                <span class="meta-dot">&bull;</span>
+                <span class="guest-fav-tag">Verified venue</span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="summary-divider">
+
+          <div class="cancellation-callout">
+            <strong>Free cancellation</strong>
+            <span>Cancel within 48 hours for a full refund. <a href="#step3Card" class="policy-link">Full policy</a></span>
+          </div>
+
+          <hr class="summary-divider">
+
+          <div class="summary-data-row">
+            <div class="data-text-col">
+              <span class="data-label">Dates</span>
+              <strong class="data-val" id="summaryDateVal">23 Nov 2026</strong>
+            </div>
+            <button type="button" class="btn-change-inline" id="btnChangeDates">Change</button>
+          </div>
+
+          <div class="inline-editor-box" id="inlineDateEditor" style="display:none;">
+            <input type="date" id="inlineDateInput" class="checkout-input">
+            <button type="button" class="btn-inline-apply" id="btnApplyDate">Apply</button>
+          </div>
+
+          <div class="summary-data-row">
+            <div class="data-text-col">
+              <span class="data-label">Guests</span>
+              <strong class="data-val" id="summaryGuestsVal">100 guests</strong>
+            </div>
+            <button type="button" class="btn-change-inline" id="btnChangeGuests">Change</button>
+          </div>
+
+          <div class="inline-editor-box" id="inlineGuestsEditor" style="display:none;">
+            <input type="number" id="inlineGuestsInput" class="checkout-input" min="10" step="10">
+            <button type="button" class="btn-inline-apply" id="btnApplyGuests">Apply</button>
+          </div>
+          <div id="inlineGuestsError" class="field-error-msg" style="display:none; color:#dc2626; font-size:0.8rem; font-weight:600; margin-top:6px;"></div>
+
+          <hr class="summary-divider">
+
+          <div class="summary-price-section">
+            <h3 class="price-section-heading">Price details (INR)</h3>
+
+            <div class="price-line">
+              <span id="priceBaseLabel">₹0 &times; 1 day</span>
+              <span id="priceBaseVal">₹0</span>
+            </div>
+
+            <hr class="summary-divider">
+
+            <div class="price-total-row">
+              <div class="total-label-col">
+                <strong>Total payable</strong>
+                <span class="tax-note">Exact venue rate &bull; No extra taxes or fees</span>
+              </div>
+              <strong class="total-bold-amount" id="priceTotalDueVal">₹0</strong>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <script src="../oop/models.js"></script>
+  <script src="../oop/services.js"></script>
+
+  <script src="checkout.js"></script>
+</body>
+</html>

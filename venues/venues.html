@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Venues by Category | VenueVerse</title>
+  <meta name="description"
+    content="Browse verified venues by category with interactive pricing maps, custom capacity filters, and real-time availability on VenueVerse.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="venues.css">
+</head>
+
+<body class="venues-page-body">
+
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+
+      <a href="../index.html" class="brand-logo" aria-label="VenueVerse Home">
+        <span class="logo-icon-wrap">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18" />
+            <path d="M5 21V7l8-4v18" />
+            <path d="M19 21V11l-6-4" />
+            <path d="M9 9h1" />
+            <path d="M9 13h1" />
+            <path d="M9 17h1" />
+          </svg>
+        </span>
+        <span class="brand-text">Venue<span class="brand-accent">Verse</span></span>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="../index.html#explore" class="nav-link">Explore</a></li>
+          <li><a href="#categoryTabsBar" class="nav-link active">Categories</a></li>
+          <li><a href="venues.html" class="nav-link">Venues</a></li>
+          <li><a href="../index.html#how-it-works" class="nav-link">How It Works</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button type="button" class="btn btn-outline" id="myBookingsNavBtn">
+            <span>My Bookings</span>
+            <span class="bookings-badge-count" id="myBookingsCountBadge">0</span>
+          </button>
+          <a href="../signin/signin.html" class="btn btn-primary">Sign In</a>
+        </div>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+    <section class="category-hero-section" id="categoryHeroSection">
+      <div class="category-hero-bg" id="categoryHeroBg"></div>
+      <div class="category-hero-overlay"></div>
+
+      <div class="container category-hero-container">
+
+        <nav class="category-breadcrumbs" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="crumb-separator">&gt;</span>
+          <a href="venues.html">Categories</a>
+          <span class="crumb-separator">&gt;</span>
+          <span class="crumb-active" id="crumbCategoryName">All Venues</span>
+        </nav>
+
+        <div class="category-header-main">
+          <div class="category-icon-bubble" id="categoryIconBubble">
+          </div>
+          <div class="category-text-group">
+            <h1 class="category-hero-title" id="categoryHeroTitle">All Event Venues</h1>
+            <p class="category-hero-subtitle" id="categoryHeroSubtitle">Discover verified spaces tailored to your occasion.</p>
+          </div>
+        </div>
+
+        <div class="category-pills-bar">
+
+          <div class="info-pill location-pill" id="locationPill">
+            <div class="pill-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div class="pill-info-text">
+              <span class="pill-label" id="currentLocationLabel">Everywhere</span>
+              <span class="pill-subtext" id="currentLocationSub">All locations</span>
+            </div>
+            <button type="button" class="btn-pill-change" id="changeLocationBtn">Change</button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="category-tabs-bar" id="categoryTabsBar">
+      <div class="container">
+        <div class="tabs-scroll-track" id="categoryTabsTrack">
+        </div>
+      </div>
+    </section>
+
+    <section class="venues-explorer-section">
+      <div class="venues-explorer-grid">
+
+        <aside class="venues-filters-sidebar" id="filtersSidebar">
+          <div class="filters-sidebar-header">
+            <div class="filters-title-wrap">
+              <svg class="filters-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14" />
+                <line x1="4" y1="10" x2="4" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12" y2="3" />
+                <line x1="20" y1="21" x2="20" y2="16" />
+                <line x1="20" y1="12" x2="20" y2="3" />
+                <line x1="1" y1="14" x2="7" y2="14" />
+                <line x1="9" y1="8" x2="15" y2="8" />
+                <line x1="17" y1="16" x2="23" y2="16" />
+              </svg>
+              <h2 class="filters-title">Filters</h2>
+            </div>
+            <button type="button" class="btn-reset-filters" id="resetFiltersBtn">Reset</button>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-group-header">
+              <span class="filter-group-title">Price Range</span>
+              <span class="filter-active-val" id="priceCurrentVal">Max: Any</span>
+            </div>
+            <div class="range-slider-wrap">
+              <input type="range" id="priceRangeSlider" min="5000" max="500000" step="5000" value="500000"
+                aria-label="Filter by maximum price">
+            </div>
+            <div class="range-labels">
+              <span>₹5,000</span>
+              <span>₹5,00,000+</span>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-group-title">Capacity</span>
+            <div class="radio-filter-list">
+              <label class="custom-radio-item">
+                <input type="radio" name="capacityFilter" value="any" checked>
+                <span class="radio-indicator"></span>
+                <span class="radio-label">Any</span>
+              </label>
+              <label class="custom-radio-item">
+                <input type="radio" name="capacityFilter" value="100">
+                <span class="radio-indicator"></span>
+                <span class="radio-label">100+ guests</span>
+              </label>
+              <label class="custom-radio-item">
+                <input type="radio" name="capacityFilter" value="200">
+                <span class="radio-indicator"></span>
+                <span class="radio-label">200+ guests</span>
+              </label>
+              <label class="custom-radio-item">
+                <input type="radio" name="capacityFilter" value="300">
+                <span class="radio-indicator"></span>
+                <span class="radio-label">300+ guests</span>
+              </label>
+              <label class="custom-radio-item">
+                <input type="radio" name="capacityFilter" value="500">
+                <span class="radio-indicator"></span>
+                <span class="radio-label">500+ guests</span>
+              </label>
+            </div>
+          </div>
+
+        </aside>
+
+        <main class="venues-feed-column">
+
+          <div class="feed-top-bar">
+            <h2 class="feed-results-count" id="feedCountTitle">
+              <span id="venueCountNumber">0</span> <span id="venueCountCategory">All Venues</span>
+            </h2>
+
+            <div class="feed-sort-wrap">
+              <label for="sortDropdown" class="sort-label">Sort by</label>
+              <select id="sortDropdown" class="sort-select">
+                <option value="recommended">Recommended</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+                <option value="capacity-high">Capacity: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="venues-cards-grid" id="venuesCardsGrid">
+          </div>
+
+          <div class="empty-venues-state" id="emptyVenuesState" style="display: none;">
+            <div class="empty-icon">🔍</div>
+            <h3 class="empty-title">No Venues Found</h3>
+            <p class="empty-desc">Try increasing your price slider, selecting "Any" capacity, or switching your location
+              to "Everywhere".</p>
+            <button type="button" class="btn btn-primary" id="emptyResetBtn">Reset All Filters</button>
+          </div>
+
+        </main>
+
+        <aside class="venues-map-column">
+          <div class="venues-map-sticky-wrap">
+
+            <div id="venuesMap" class="venues-interactive-map" role="region"
+              aria-label="Venues interactive map with pricing pins"></div>
+
+            <button type="button" class="btn-search-area" id="searchAreaBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <span>Search this area</span>
+            </button>
+
+            <div class="map-floating-notice">
+              📍 Click any price badge on the map to jump directly to the venue card.
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="locationModal" aria-hidden="true">
+    <div class="modal-box modal-box-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">Select Location</h3>
+        <button type="button" class="modal-close-btn" id="closeLocationModal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Filter venues across popular cities in Gujarat &amp; western India:</p>
+        <div class="cities-select-grid" id="citiesSelectGrid">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="venueDetailsModal" aria-hidden="true">
+    <div class="modal-box modal-box-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-badge-avail">● Available</span>
+          <h3 class="modal-title" id="modalVenueTitle">Venue Details</h3>
+          <span class="modal-subtitle" id="modalVenueLocation">Location</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="closeVenueModal" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body venue-modal-grid">
+        <div class="modal-photo-col">
+          <img id="modalVenueImg" src="../assets/venue-glasshouse.jpg" alt="Venue photo" class="modal-venue-photo">
+          <div class="modal-stats-row">
+            <div class="modal-stat-item">
+              <span class="stat-meta-label">Capacity</span>
+              <strong id="modalVenueCapacity">--</strong>
+            </div>
+            <div class="modal-stat-item">
+              <span class="stat-meta-label">Rating</span>
+              <strong id="modalVenueRating">No rating (0 reviews)</strong>
+            </div>
+          </div>
+          <div style="margin-top:12px;">
+            <a href="#" id="modalReadReviewsLink" class="btn btn-outline"
+              style="width:100%; text-align:center; display:inline-block; text-decoration:none;">Read &amp; Add Reviews
+              &rarr;</a>
+          </div>
+        </div>
+
+        <div class="modal-details-col">
+          <h4 class="modal-section-heading">About This Venue</h4>
+          <p class="modal-desc-text" id="modalVenueDesc">Loading venue details...</p>
+
+          <div class="modal-category-features-box" id="modalCategoryFeaturesBox">
+            <span class="oop-feature-tag" id="modalCategoryBadge">Category Special</span>
+            <ul class="modal-special-features-list" id="modalSpecialFeaturesList">
+            </ul>
+          </div>
+
+          <h4 class="modal-section-heading">Key Amenities</h4>
+          <ul class="modal-amenities-list" id="modalVenueAmenities">
+          </ul>
+
+          <div class="modal-booking-card">
+            <h4 class="modal-section-heading" style="margin-bottom: 8px;">Check Availability &amp; Reserve</h4>
+
+            <div class="booking-input-grid">
+              <div class="booking-field">
+                <label for="modalBookingDate">Event Date</label>
+                <input type="date" id="modalBookingDate" class="booking-ctrl-input">
+              </div>
+              <div class="booking-field">
+                <label for="modalBookingGuests">Guests Count</label>
+                <input type="number" id="modalBookingGuests" class="booking-ctrl-input" value="100" min="10" step="10">
+              </div>
+            </div>
+
+            <div class="availability-status-pill available" id="modalAvailabilityPill">
+              <span class="status-dot">●</span> <span id="modalAvailabilityText">Select date to verify
+                availability</span>
+            </div>
+
+            <div class="oop-price-breakdown-card" id="modalPriceBreakdown">
+              <div class="breakdown-row">
+                <span>Venue Rate (1 day):</span>
+                <span id="bdBasePrice">₹0</span>
+              </div>
+              <div class="breakdown-row" style="color:#64748b; font-size:0.82rem;">
+                <span>Taxes &amp; Extra Fees:</span>
+                <span>None (₹0)</span>
+              </div>
+            </div>
+
+            <div class="booking-price-row">
+              <div class="booking-price-col">
+                <span class="booking-rate" id="modalVenuePrice">₹0</span>
+                <span class="booking-rate-sub" id="modalPriceNote">Total payable for 1 day (exact price)</span>
+              </div>
+              <button type="button" class="btn btn-primary btn-modal-book" id="modalBookNowBtn">
+                <span>Confirm &amp; Book</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="myBookingsModal" aria-hidden="true">
+    <div class="modal-box modal-box-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-badge-avail">● Confirmed Reservations</span>
+          <h3 class="modal-title">My Bookings</h3>
+          <span class="modal-subtitle">Showing reservations managed through BookingService</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="closeMyBookingsModal"
+          aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="my-bookings-container" id="myBookingsContainer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="oopInspectorModal" aria-hidden="true">
+    <div class="modal-box modal-box-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-badge-avail">● Evaluation Architecture Guide</span>
+          <h3 class="modal-title">OOP Concepts Mapping (Stages 1 – 3)</h3>
+          <span class="modal-subtitle">Direct correspondence to the 12-Week Syllabus (Completed up to Oct 15)</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="closeOopInspectorModal"
+          aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body oop-inspector-body">
+        <div class="oop-stage-card">
+          <h4>Stage 1: Core Classes &amp; Encapsulation (W1–W2)</h4>
+          <p><strong>Classes:</strong> <code>Venue</code>, <code>User</code>, <code>Customer</code>, <code>Admin</code>,
+            <code>Booking</code>.</p>
+          <p><strong>Encapsulation:</strong> Private fields (<code>#id</code>, <code>#basePrice</code>,
+            <code>#bookedDates</code>, <code>#status</code>) accessed via controlled getters &amp; methods
+            (<code>checkAvailability()</code>, <code>bookDate()</code>, <code>cancel()</code>).</p>
+          <p><strong>File:</strong> <code>oop/models.js</code></p>
+        </div>
+        <div class="oop-stage-card">
+          <h4>Stage 2: Inheritance &amp; Polymorphism (W3–W4)</h4>
+          <p><strong>Inheritance:</strong> <code>Customer</code> &amp; <code>Admin</code> extend <code>User</code>;
+            <code>WeddingVenue</code>, <code>BirthdayVenue</code>, <code>ConferenceVenue</code> extend
+            <code>Venue</code>.</p>
+          <p><strong>Polymorphism:</strong> <code>calculateTotalPrice()</code> is dynamically overridden in each
+            subclass to include event-specific pricing rules &amp; feature sets.</p>
+          <p><strong>Composition:</strong> <code>Booking</code> holds references to <code>Venue</code> and
+            <code>Customer</code> instances (has-a relationship).</p>
+          <p><strong>File:</strong> <code>oop/models.js</code></p>
+        </div>
+        <div class="oop-stage-card">
+          <h4>Stage 3: Abstraction &amp; Service Layer (W5–W8)</h4>
+          <p><strong>Abstraction:</strong> UI never accesses raw arrays directly; all operations pass through
+            <code>VenueSearchService</code> and <code>BookingService</code>.</p>
+          <p><strong>Method Overloading:</strong> <code>VenueSearchService.search(...)</code> handles multiple call
+            signatures (keyword, category + location, or filter object).</p>
+          <p><strong>Lifecycle:</strong> Full date availability verification, booking creation, and cancellation
+            integrated with browser storage.</p>
+          <p><strong>File:</strong> <code>oop/services.js</code> &amp; <code>venues.js</code></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-bottom-row">
+        <p class="copyright-text">&copy; 2026 VenueVerse. All rights reserved.</p>
+        <p class="project-credit-text">College Web Development Project &bull; Built with HTML5, CSS3, Vanilla JS &amp;
+          Leaflet</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script src="../oop/models.js"></script>
+  <script src="../oop/services.js"></script>
+
+  <script src="venues.js"></script>
+  <script src="../auth-nav.js"></script>
+</body>
+
+</html>
