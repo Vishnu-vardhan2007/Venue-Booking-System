@@ -1,0 +1,68 @@
+@startuml
+class Customer {
+    - customerId : int
+    - name : String
+    - email : String
+    - phone : String
+    - password : String
+
+    + register() : void
+    + login() : boolean
+    + searchVenue() : List<Venue>
+    + viewVenueOwnerDetails() : VenueOwner
+    + makeBooking() : Booking
+    + viewBookingHistory() : List<Booking>
+}
+
+class VenueOwner {
+    - ownerId : int
+    - name : String
+    - email : String
+    - phone : String
+    - password : String
+
+    + register() : void
+    + login() : boolean
+    + addVenue() : Venue
+    + updateVenue() : void
+    + manageVenue() : void
+    + updateAvailability() : void
+    + viewBookings() : List<Booking>
+    + updateBookingStatus() : void
+}
+
+class Venue {
+    - venueId : int
+    - name : String
+    - location : String
+    - type : String
+    - capacity : int
+    - price : double
+    - availability : boolean
+
+    + getDetails() : String
+    + matchesCriteria() : boolean
+    + updateDetails() : void
+    + checkAvailability() : boolean
+}
+
+class Booking {
+    - bookingId : int
+    - bookingDate : Date
+    - status : String
+
+    + createBooking() : void
+    + cancelBooking() : void
+    + updateStatus() : void
+}
+
+
+Customer "1" --> "0..*" Venue : searches
+Customer "1" --> "0..*" Booking : makes
+Customer --> VenueOwner : views details
+Customer --> Booking : views history
+
+VenueOwner "1" --> "1..*" Venue : manages
+Venue "1" --> "0..*" Booking : has
+VenueOwner --> Booking : manages status
+@enduml

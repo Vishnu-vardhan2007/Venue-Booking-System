@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venue Owner Dashboard | VenueFlow</title>
+  <meta name="description" content="VenueFlow Venue Owner / Host Dashboard - Manage your venues, reservations, availability calendar, and booking requests.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="owner.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <aside id="sidebar" class="sidebar" aria-label="Venue Owner Navigation">
+      <div class="sidebar-header">
+        <a href="../index.html" class="brand-wrapper" style="text-decoration:none; color:inherit;" title="Return to VenueVerse Marketplace">
+          <div class="brand-icon-box" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18"/>
+              <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/>
+              <path d="M9 9h1"/>
+              <path d="M9 13h1"/>
+              <path d="M14 9h1"/>
+              <path d="M14 13h1"/>
+            </svg>
+          </div>
+          <div class="brand-info">
+            <span class="brand-name">VenueFlow</span>
+            <span class="brand-badge">Host Portal</span>
+          </div>
+        </a>
+        <button id="sidebarCloseBtn" class="sidebar-close-btn" aria-label="Close sidebar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Host Menu</div>
+        <ul class="nav-list">
+          
+          <li class="nav-item active" data-view="overview">
+            <a class="nav-link" id="nav-overview" role="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+              <span>Overview</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-view="venues">
+            <a class="nav-link" id="nav-venues" role="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 21h18"/>
+                <path d="M9 8h1"/>
+                <path d="M9 12h1"/>
+                <path d="M9 16h1"/>
+                <path d="M14 8h1"/>
+                <path d="M14 12h1"/>
+                <path d="M14 16h1"/>
+                <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/>
+              </svg>
+              <span>My Venues</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-view="bookings">
+            <a class="nav-link" id="nav-bookings" role="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <span>Bookings</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-view="calendar">
+            <a class="nav-link" id="nav-calendar" role="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+                <path d="M8 14h.01"/>
+                <path d="M12 14h.01"/>
+                <path d="M16 14h.01"/>
+                <path d="M8 18h.01"/>
+                <path d="M12 18h.01"/>
+              </svg>
+              <span>Availability & Calendar</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-view="earnings">
+            <a class="nav-link" id="nav-earnings" role="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+              <span>Earnings & Payments</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-view="analytics">
+            <a class="nav-link" id="nav-analytics" role="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+              <span>Analytics</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-view="reviews">
+            <a class="nav-link" id="nav-reviews" role="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <span>Reviews & Ratings</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-view="notifications">
+            <a class="nav-link" id="nav-notifications" role="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+              <span>Notifications</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-view="settings">
+            <a class="nav-link" id="nav-settings" role="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+              <span>Profile & Settings</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-view="logout">
+            <a class="nav-link" id="nav-logout" role="button" style="color:#f87171;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+              <span>Logout</span>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="owner-profile">
+          <div class="owner-avatar" title="Venue Owner">VO</div>
+          <div class="owner-meta">
+            <span class="owner-name">Venue Owner</span>
+            <span class="owner-role">Verified Host</span>
+          </div>
+        </div>
+        <button class="logout-btn" onclick="switchDashboardView('logout');" title="Logout" aria-label="Logout">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle navigation">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="page-title-box">
+            <h1 id="topbarPageTitle">Venue Owner Dashboard</h1>
+            <p class="page-welcome" id="topbarPageSubtitle">Welcome back! Overview of your venues, bookings & earnings.</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <a href="../index.html" class="btn-sm btn-outline" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to Marketplace</span>
+          </a>
+
+          <button type="button" class="btn-sm btn-primary" onclick="openAddVenueModal();">
+            + Add New Venue
+          </button>
+
+          <div class="date-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span id="ownerDateDisplay">Today</span>
+          </div>
+
+          <div class="notification-wrapper">
+            <button class="icon-btn" id="notifBtn" aria-label="Notifications" title="Notifications">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+              <span id="notifBadge" class="notification-badge" aria-label="Unread alerts"></span>
+            </button>
+
+            <div id="notifPanel" class="notification-panel" role="region" aria-label="Notifications">
+              <div class="notification-header">
+                <h4>Host Notifications</h4>
+                <button class="clear-btn" id="clearNotifBtn">Mark all as read</button>
+              </div>
+              <ul class="notification-list" id="topbarNotifList">
+                <li style="text-align:center; padding:20px; color:#6b7280; font-size:0.85rem;">No unread host notifications.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="topbar-owner-btn" title="Logged in as Venue Owner">
+            <div class="owner-avatar" style="width:32px; height:32px; font-size:0.78rem;">VO</div>
+            <span class="topbar-owner-name">Venue Owner</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+
+        <section id="view-overview" class="dashboard-view active" aria-label="Overview Dashboard">
+          
+          <div class="summary-grid">
+            
+            <div class="summary-card">
+              <div class="card-top">
+                <span class="card-label">Total Venues</span>
+                <div class="card-icon indigo">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 21h18"/>
+                    <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/>
+                    <path d="M9 9h1"/>
+                    <path d="M9 13h1"/>
+                    <path d="M14 9h1"/>
+                    <path d="M14 13h1"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="card-value" id="statTotalVenues">0</div>
+              <div class="card-support-text">Active venue listings</div>
+            </div>
+
+            <div class="summary-card">
+              <div class="card-top">
+                <span class="card-label">Total Bookings</span>
+                <div class="card-icon blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="card-value" id="statTotalBookings">0</div>
+              <div class="card-support-text">All recorded bookings</div>
+            </div>
+
+            <div class="summary-card highlight-blue">
+              <div class="card-top">
+                <span class="card-label">Upcoming Bookings</span>
+                <div class="card-icon violet">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="card-value" id="statUpcomingBookings" style="color:#2563eb;">0</div>
+              <div class="card-support-text">Scheduled future events</div>
+            </div>
+
+            <div class="summary-card">
+              <div class="card-top">
+                <span class="card-label">Published Venues</span>
+                <div class="card-icon amber">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="card-value" id="statActiveVenues" style="color:#2563eb;">0</div>
+              <div class="card-support-text">Live on customer marketplace</div>
+            </div>
+
+            <div class="summary-card">
+              <div class="card-top">
+                <span class="card-label">Confirmed Bookings</span>
+                <div class="card-icon emerald">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="card-value" id="statConfirmedBookings" style="color:#059669;">0</div>
+              <div class="card-support-text">Instant confirmed reservations</div>
+            </div>
+
+            <div class="summary-card">
+              <div class="card-top">
+                <span class="card-label">Total Earnings</span>
+                <div class="card-icon emerald">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="card-value" id="statTotalEarnings" style="color:#059669;">₹0</div>
+              <div class="card-support-text">Received for confirmed events</div>
+            </div>
+
+          </div>
+
+          <div class="panel-card">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2>Recent Bookings & Activity</h2>
+                <p class="section-subtitle">Real-time instant reservations placed for your venue listings</p>
+              </div>
+              <button type="button" class="btn-sm btn-secondary" onclick="switchDashboardView('bookings');">
+                View All Bookings &rarr;
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table" aria-label="Recent Bookings Table">
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Customer Name</th>
+                    <th>Venue</th>
+                    <th>Event Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="overviewRecentBookingsTbody"><tr><td colspan="7" style="text-align:center; padding:32px; color:#6b7280;">No recent bookings for your venues.</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="section-title-group" style="margin-bottom:14px;">
+              <h2>Quick Actions</h2>
+              <p class="section-subtitle">Common management shortcuts</p>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;">
+              <button type="button" class="btn-sm btn-primary" onclick="openAddVenueModal();" style="padding:14px; flex-direction:column; gap:6px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Add New Venue</span>
+              </button>
+              <button type="button" class="btn-sm btn-secondary" onclick="switchDashboardView('venues');" style="padding:14px; flex-direction:column; gap:6px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>
+                <span>Manage Venues</span>
+              </button>
+              <button type="button" class="btn-sm btn-secondary" onclick="switchDashboardView('bookings');" style="padding:14px; flex-direction:column; gap:6px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+                <span>View All Bookings</span>
+              </button>
+              <button type="button" class="btn-sm btn-secondary" onclick="switchDashboardView('calendar');" style="padding:14px; flex-direction:column; gap:6px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>Manage Availability</span>
+              </button>
+            </div>
+          </div>
+
+        </section>
+
+        <section id="view-venues" class="dashboard-view" aria-label="My Venues Management">
+          <div class="panel-card">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2>My Venues Management</h2>
+                <p class="section-subtitle">Manage your spaces, pricing, visibility, and venue details</p>
+              </div>
+              <button type="button" class="btn-sm btn-primary" onclick="openAddVenueModal();">
+                + Add New Venue
+              </button>
+            </div>
+
+            <div class="table-filter-bar" id="venueFilterTabs">
+              <div class="table-filter-tabs">
+                <button type="button" class="filter-tab active" onclick="filterVenues('all', this);">All Venues</button>
+                <button type="button" class="filter-tab" onclick="filterVenues('pending', this);">Pending Admin Approval</button>
+                <button type="button" class="filter-tab" onclick="filterVenues('published', this);">Published</button>
+                <button type="button" class="filter-tab" onclick="filterVenues('draft', this);">Drafts / Rejected</button>
+              </div>
+            </div>
+
+            <div class="venues-grid" id="myVenuesGrid">
+              <div style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:8px; padding:32px; color:#6b7280; text-align:center; grid-column:1 / -1;">
+                You haven't listed any venues yet. Click "+ Add New Venue" above to list your first space.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-bookings" class="dashboard-view" aria-label="Bookings Management">
+          <div class="panel-card">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2>Bookings &amp; Reservations</h2>
+                <p class="section-subtitle">
+                  All user venue bookings are confirmed instantly upon checkout when dates are available.
+                </p>
+              </div>
+            </div>
+
+            <div class="table-filter-bar" id="bookingFilterTabs">
+              <div class="table-filter-tabs">
+                <button type="button" class="filter-tab active" onclick="filterBookings('all', this);">All Bookings</button>
+                <button type="button" class="filter-tab" onclick="filterBookings('confirmed', this);">Confirmed</button>
+                <button type="button" class="filter-tab" onclick="filterBookings('completed', this);">Completed</button>
+                <button type="button" class="filter-tab" onclick="filterBookings('cancelled', this);">Cancelled</button>
+              </div>
+
+              <div class="table-search-inline">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="ownerBookingSearchInput" placeholder="Filter customer, ID, venue..." oninput="searchBookings(this.value);">
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table" aria-label="Bookings Table">
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Customer Name</th>
+                    <th>Venue</th>
+                    <th>Event Date</th>
+                    <th>Guests</th>
+                    <th>Amount</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="bookingsTableTbody"><tr><td colspan="9" style="text-align:center; padding:32px; color:#6b7280;">No booking requests found.</td></tr></tbody>
+              </table>
+              <div id="bookingTableEmptyState" style="display:none; text-align:center; padding:36px; color:#6b7280;">
+                No bookings found matching this filter.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-calendar" class="dashboard-view" aria-label="Availability and Calendar">
+          <div class="panel-card">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2>Availability Calendar & Scheduling</h2>
+                <p class="section-subtitle">Real-time reservations and maintenance date management to prevent double-booking</p>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <label for="calendarVenueSelect" style="font-size:0.82rem; font-weight:600;">Select Venue:</label>
+                <select id="calendarVenueSelect" class="form-control" style="width:240px; padding:6px 10px; font-size:0.82rem;" onchange="filterCalendarVenue(this.value);">
+                  <option value="">No venues listed yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="calendar-container">
+              <div class="calendar-card">
+                <div class="calendar-header">
+                  <button type="button" class="calendar-nav-btn" id="calPrevMonthBtn">&larr; Previous</button>
+                  <h3 id="calendarMonthTitle" style="font-size:1.1rem; font-weight:700;">October 2026</h3>
+                  <button type="button" class="calendar-nav-btn" id="calNextMonthBtn">Next &rarr;</button>
+                </div>
+
+                <div class="calendar-weekdays">
+                  <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+
+                <div class="calendar-grid" id="calendarDaysGrid"></div>
+
+                <div class="legend-row">
+                  <div class="legend-item"><span class="legend-dot" style="background:#a7f3d0;"></span><span>Confirmed Booking</span></div>
+                  <div class="legend-item"><span class="legend-dot" style="background:#fee2e2; border:1px solid #fecaca;"></span><span>Blocked by You</span></div>
+                  <div class="legend-item"><span class="legend-dot" style="background:#f3f4f6; border:1px solid #d1d5db;"></span><span>Past / Unavailable</span></div>
+                  <div class="legend-item"><span class="legend-dot" style="background:#ffffff; border:1px solid #d1d5db;"></span><span>Available</span></div>
+                </div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <div class="panel-card" style="padding:16px;">
+                  <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:10px;">Date Information</h3>
+                  <div id="calendarDayDetailBox">
+                    <p style="color:#6b7280; font-size:0.84rem;">Click any future date on the calendar to view bookings or block/unblock availability.</p>
+                  </div>
+                </div>
+
+                <div class="panel-card" style="padding:16px; background:#f9fafb;">
+                  <h4 style="font-size:0.86rem; font-weight:700; margin-bottom:6px;">Calendar Rules:</h4>
+                  <ul style="font-size:0.78rem; color:#4b5563; padding-left:18px; line-height:1.5;">
+                    <li>Past dates are automatically unavailable and cannot be booked or modified.</li>
+                    <li>Select a specific venue to block or unblock future dates (no self-booking needed).</li>
+                    <li>Confirmed bookings automatically lock the selected date.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-earnings" class="dashboard-view" aria-label="Earnings and Payments">
+          <div class="panel-card">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2>Earnings & Payment Transactions</h2>
+                <p class="section-subtitle">Track received customer payments, pending deposits, and refunds</p>
+              </div>
+            </div>
+
+            <div class="summary-grid" style="margin-bottom:18px;">
+              <div class="summary-card">
+                <span class="card-label">Received Earnings</span>
+                <div class="card-value" id="earnTotalReceived" style="color:#059669; font-size:1.6rem; margin-top:4px;">₹0</div>
+                <span class="card-support-text">Successfully processed</span>
+              </div>
+              <div class="summary-card">
+                <span class="card-label">Pending Deposits</span>
+                <div class="card-value" id="earnPendingDeposits" style="color:#d97706; font-size:1.6rem; margin-top:4px;">₹0</div>
+                <span class="card-support-text">Awaiting final settlement</span>
+              </div>
+              <div class="summary-card">
+                <span class="card-label">Total Refunded</span>
+                <div class="card-value" id="earnTotalRefunded" style="color:#6b7280; font-size:1.6rem; margin-top:4px;">₹0</div>
+                <span class="card-support-text">Declined/cancelled slots</span>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table" aria-label="Transactions Table">
+                <thead>
+                  <tr>
+                    <th>Transaction Ref</th>
+                    <th>Booking ID</th>
+                    <th>Customer</th>
+                    <th>Venue</th>
+                    <th>Event Date</th>
+                    <th>Amount</th>
+                    <th>Payment Status</th>
+                  </tr>
+                </thead>
+                <tbody id="earningsTransactionsTbody">
+                  <tr><td colspan="7" style="text-align:center; padding:32px; color:#6b7280;">No payment transactions recorded.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-analytics" class="dashboard-view" aria-label="Analytics">
+          <div class="panel-card">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2>Venue Analytics & Performance</h2>
+                <p class="section-subtitle">Real performance breakdown based on recorded bookings</p>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+              
+              <div class="summary-card" style="padding:20px;">
+                <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:12px;">Booking Status Breakdown</h3>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                  <div>
+                    <div style="display:flex; justify-content:space-between; font-size:0.84rem; margin-bottom:4px;">
+                      <span>✓ Confirmed Bookings</span>
+                      <strong id="analyticsConfirmedCount">0 Bookings (0%)</strong>
+                    </div>
+                    <div style="height:10px; background:#e5e7eb; border-radius:5px; overflow:hidden;">
+                      <div id="analyticsConfirmedBar" style="width:0%; height:100%; background:#059669;"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="display:flex; justify-content:space-between; font-size:0.84rem; margin-bottom:4px;">
+                      <span>✕ Cancelled Bookings</span>
+                      <strong id="analyticsCancelledCount">0 Cancelled (0%)</strong>
+                    </div>
+                    <div style="height:10px; background:#e5e7eb; border-radius:5px; overflow:hidden;">
+                      <div id="analyticsCancelledBar" style="width:0%; height:100%; background:#dc2626;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="summary-card" style="padding:20px;">
+                <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:12px;">Top Performing Venues</h3>
+                <div class="venue-meta-details" id="ownerTopVenuesList" style="margin-bottom:0;">
+                  <div style="color:#6b7280; font-size:0.88rem; padding:12px 0;">No venue bookings recorded yet.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <section id="view-reviews" class="dashboard-view" aria-label="Reviews and Ratings">
+          <div class="panel-card">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2>Customer Reviews & Ratings</h2>
+                <p class="section-subtitle">Verified feedback from customers who booked your venues</p>
+              </div>
+            </div>
+
+            <div class="reviews-list" id="reviewsContainer">
+              <div style="text-align:center; padding:32px; color:#6b7280;">No customer reviews received yet. Verified reviews will appear here.</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-notifications" class="dashboard-view" aria-label="Host Notifications">
+          <div class="panel-card">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2>Host Notifications & Alerts</h2>
+                <p class="section-subtitle">Real-time alerts for booking requests, confirmations, and reminders</p>
+              </div>
+            </div>
+
+            <ul class="notification-list" id="notificationsViewList" style="max-height:none;">
+              <li style="text-align:center; padding:32px; color:#6b7280;">No notifications received yet.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="view-settings" class="dashboard-view" aria-label="Profile and Settings">
+          <div class="panel-card">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2>Host Profile & Business Settings</h2>
+                <p class="section-subtitle">Update your personal contact details, business profile, and preferences</p>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+              
+              <form id="hostProfileForm" class="panel-card" style="box-shadow:none; border:1px solid #e5e7eb;">
+                <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:14px;">Contact & Business Details</h3>
+                
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label" for="profHostName">Full Name</label>
+                  <input type="text" class="form-control" id="profHostName" value="" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label" for="profHostEmail">Email Address (Read-only)</label>
+                  <input type="email" class="form-control" id="profHostEmail" value="" placeholder="host@example.com" disabled>
+                </div>
+
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label" for="profHostPhone">Phone Number</label>
+                  <input type="text" class="form-control" id="profHostPhone" value="" placeholder="+91 98000 00000">
+                </div>
+
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label" for="profBusinessName">Business / Agency Name</label>
+                  <input type="text" class="form-control" id="profBusinessName" value="" placeholder="Your hospitality or venue brand">
+                </div>
+
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label class="form-label" for="profHostCity">Primary City</label>
+                  <input type="text" class="form-control" id="profHostCity" value="" placeholder="e.g. Hyderabad, Mumbai">
+                </div>
+
+                <button type="submit" class="btn-sm btn-primary">Save Profile Changes</button>
+              </form>
+
+              <form id="changePasswordForm" class="panel-card" style="box-shadow:none; border:1px solid #e5e7eb;">
+                <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:14px;">Security & Password</h3>
+                
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label" for="currentPassInput">Current Password</label>
+                  <input type="password" class="form-control" id="currentPassInput" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label class="form-label" for="newPassInput">New Password</label>
+                  <input type="password" class="form-control" id="newPassInput" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label class="form-label" for="confirmPassInput">Confirm New Password</label>
+                  <input type="password" class="form-control" id="confirmPassInput" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-sm btn-secondary">Update Password</button>
+              </form>
+
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <div id="venueModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="venueModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="venueModalTitle">Add New Venue Listing</h3>
+        <button type="button" class="modal-close-btn" data-dismiss="modal">&times;</button>
+      </div>
+      <form id="venueForm">
+        <div class="modal-body">
+          
+          <div class="form-group">
+            <label class="form-label" for="venueNameInput">Venue Name *</label>
+            <input type="text" class="form-control" id="venueNameInput" placeholder="e.g. Royal Palace Banquet" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Event Categories (Select one or more) *</label>
+            <div id="venueCategoriesChecklist" style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px; padding:10px; border:1px solid #d1d5db; border-radius:8px; background:#f9fafb;">
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; cursor:pointer;"><input type="checkbox" name="ownerVenueCategories" value="wedding" checked> Wedding &amp; Banquet</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; cursor:pointer;"><input type="checkbox" name="ownerVenueCategories" value="birthday"> Birthday</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; cursor:pointer;"><input type="checkbox" name="ownerVenueCategories" value="party"> Party</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; cursor:pointer;"><input type="checkbox" name="ownerVenueCategories" value="conference"> Conference</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; cursor:pointer;"><input type="checkbox" name="ownerVenueCategories" value="corporate"> Corporate Event</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; cursor:pointer;"><input type="checkbox" name="ownerVenueCategories" value="photoshoot"> Photoshoot</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; cursor:pointer;"><input type="checkbox" name="ownerVenueCategories" value="engagement"> Engagement</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; cursor:pointer;"><input type="checkbox" name="ownerVenueCategories" value="reception"> Reception</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="venueLocationInput">City *</label>
+            <select class="form-control" id="venueLocationInput" required>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Gandhinagar">Gandhinagar</option>
+              <option value="Surat">Surat</option>
+              <option value="Rajkot">Rajkot</option>
+              <option value="Vadodara">Vadodara</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="venueAddressInput">Full Street Address *</label>
+            <input type="text" class="form-control" id="venueAddressInput" placeholder="e.g. Near SG Highway, Bodakdev" required>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="venueCapacityInput">Guest Capacity *</label>
+              <input type="number" class="form-control" id="venueCapacityInput" placeholder="e.g. 500" min="10" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="venuePriceInput">Base Price Per Day (₹) *</label>
+              <input type="number" class="form-control" id="venuePriceInput" placeholder="e.g. 45000" min="1000" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="venueImageInput">Cover Photo</label>
+            <select class="form-control" id="venueImageInput">
+              <option value="assets/venue-ballroom.jpg">Grand Ballroom</option>
+              <option value="assets/venue-glasshouse.jpg">Glasshouse Lawn</option>
+              <option value="assets/venue-skyline.jpg">Skyline Rooftop</option>
+              <option value="assets/venue-dining.jpg">Banquet Dining Hall</option>
+              <option value="assets/cat-conference.jpg">Conference Hall</option>
+              <option value="assets/cat-photoshoot.jpg">Photoshoot Studio</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="venueDescInput">Venue Description *</label>
+            <textarea class="form-control" id="venueDescInput" rows="3" placeholder="Describe the space, acoustics, parking, and unique features..." required></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-sm btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn-sm btn-primary">Publish Venue Listing</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="venueDetailsModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Venue Specifications</h3>
+        <button type="button" class="modal-close-btn" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4 id="viewModalVenueName" style="font-size:1.15rem; font-weight:700; color:#111827;"></h4>
+        <div style="margin-bottom:10px;">
+          <span class="status-badge approved" id="viewModalVenueCategory"></span>
+        </div>
+        <div class="venue-meta-details">
+          <div class="meta-row"><span class="meta-label">Location:</span><span class="meta-value" id="viewModalVenueLocation"></span></div>
+          <div class="meta-row"><span class="meta-label">Capacity:</span><span class="meta-value" id="viewModalVenueCapacity"></span></div>
+          <div class="meta-row"><span class="meta-label">Base Rate:</span><span class="meta-value" id="viewModalVenuePrice"></span></div>
+          <div class="meta-row"><span class="meta-label">Amenities:</span><span class="meta-value" id="viewModalVenueAmenities"></span></div>
+        </div>
+        <p id="viewModalVenueDesc" style="font-size:0.84rem; color:#4b5563; line-height:1.5;"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-sm btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="bookingDetailsModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Reservation Details</h3>
+        <button type="button" class="modal-close-btn" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="venue-meta-details">
+          <div class="meta-row"><span class="meta-label">Booking ID:</span><span class="meta-value" id="bDetailId"></span></div>
+          <div class="meta-row"><span class="meta-label">Customer:</span><span class="meta-value" id="bDetailCustomer"></span></div>
+          <div class="meta-row"><span class="meta-label">Venue:</span><span class="meta-value" id="bDetailVenue"></span></div>
+          <div class="meta-row"><span class="meta-label">Date:</span><span class="meta-value" id="bDetailDate"></span></div>
+          <div class="meta-row"><span class="meta-label">Guest Count:</span><span class="meta-value" id="bDetailGuests"></span></div>
+          <div class="meta-row"><span class="meta-label">Total Amount:</span><span class="meta-value" id="bDetailAmount"></span></div>
+          <div class="meta-row"><span class="meta-label">Contact:</span><span class="meta-value" id="bDetailContact"></span></div>
+          <div class="meta-row"><span class="meta-label">Host Note:</span><span class="meta-value" id="bDetailMessage"></span></div>
+          <div class="meta-row"><span class="meta-label">Status:</span><span class="meta-value" id="bDetailStatus"></span></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-sm btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="owner.js"></script>
+</body>
+</html>

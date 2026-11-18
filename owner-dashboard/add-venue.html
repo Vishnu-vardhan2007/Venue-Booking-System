@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Venue &bull; Host Portal | VenueVerse</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="add-venue.css">
+</head>
+<body class="host-setup-body">
+
+  <header class="host-setup-header">
+    <div class="host-header-inner">
+      <a href="../index.html" class="brand-logo" aria-label="VenueVerse Home">
+        <span class="logo-icon-wrap">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18"/>
+            <path d="M5 21V7l8-4v18"/>
+            <path d="M19 21V11l-6-4"/>
+            <path d="M9 9h1"/>
+            <path d="M9 13h1"/>
+            <path d="M9 17h1"/>
+          </svg>
+        </span>
+        <span class="brand-text">Venue<span class="brand-accent">Verse</span></span>
+      </a>
+
+      <div class="setup-progress-pill">
+        <span>Host Setup Wizard</span>
+        <span class="setup-step-counter" id="stepCounterText">Step 1 of 4</span>
+      </div>
+
+      <a href="owner.html" class="btn-exit-setup">Back to Owner Dashboard</a>
+    </div>
+  </header>
+
+  <main class="host-main-container">
+    <div class="host-layout-grid">
+
+      <div class="host-steps-column">
+
+        <section class="wizard-step-card is-active" id="wizardStep1">
+          <div class="wizard-card-header">
+            <span class="wizard-step-tag">Step 1</span>
+            <h1 class="wizard-heading">Tell us about your venue</h1>
+            <p class="wizard-sub">Start with the basics. What kind of space are you listing?</p>
+          </div>
+
+          <div class="wizard-form-body">
+            
+            <div class="form-group">
+              <label for="venueTitleInput" class="form-label">Venue Name / Title</label>
+              <input 
+                type="text" 
+                id="venueTitleInput" 
+                class="host-input" 
+                placeholder="e.g., The Grand Ivory Palace"
+                value=""
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Event Categories (Select one or more)</label>
+              <div class="category-tiles-grid">
+                
+                <label class="cat-choice-tile is-selected" data-cat="wedding">
+                  <input type="checkbox" name="venueCategory" value="wedding" checked>
+                  <span class="cat-tile-icon">💍</span>
+                  <strong class="cat-tile-name">Wedding</strong>
+                  <span class="cat-tile-sub">Banquets &amp; Lawns</span>
+                </label>
+
+                <label class="cat-choice-tile" data-cat="birthday">
+                  <input type="checkbox" name="venueCategory" value="birthday">
+                  <span class="cat-tile-icon">🎂</span>
+                  <strong class="cat-tile-name">Birthday</strong>
+                  <span class="cat-tile-sub">Parties &amp; Rooftops</span>
+                </label>
+
+                <label class="cat-choice-tile" data-cat="conference">
+                  <input type="checkbox" name="venueCategory" value="conference">
+                  <span class="cat-tile-icon">💼</span>
+                  <strong class="cat-tile-name">Conference</strong>
+                  <span class="cat-tile-sub">Summits &amp; Meetings</span>
+                </label>
+
+                <label class="cat-choice-tile" data-cat="photoshoot">
+                  <input type="checkbox" name="venueCategory" value="photoshoot">
+                  <span class="cat-tile-icon">📸</span>
+                  <strong class="cat-tile-name">Photoshoot</strong>
+                  <span class="cat-tile-sub">Studios &amp; Lofts</span>
+                </label>
+
+                <label class="cat-choice-tile" data-cat="engagement">
+                  <input type="checkbox" name="venueCategory" value="engagement">
+                  <span class="cat-tile-icon">💐</span>
+                  <strong class="cat-tile-name">Engagement</strong>
+                  <span class="cat-tile-sub">Roka &amp; Ceremonies</span>
+                </label>
+
+                <label class="cat-choice-tile" data-cat="party">
+                  <input type="checkbox" name="venueCategory" value="party">
+                  <span class="cat-tile-icon">🎉</span>
+                  <strong class="cat-tile-name">Party</strong>
+                  <span class="cat-tile-sub">Social Gatherings</span>
+                </label>
+
+                <label class="cat-choice-tile" data-cat="reception">
+                  <input type="checkbox" name="venueCategory" value="reception">
+                  <span class="cat-tile-icon">✨</span>
+                  <strong class="cat-tile-name">Reception</strong>
+                  <span class="cat-tile-sub">Grand Dinners</span>
+                </label>
+
+                <label class="cat-choice-tile" data-cat="corporate">
+                  <input type="checkbox" name="venueCategory" value="corporate">
+                  <span class="cat-tile-icon">🏢</span>
+                  <strong class="cat-tile-name">Corporate Event</strong>
+                  <span class="cat-tile-sub">Offsites &amp; Galas</span>
+                </label>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="spaceTypeSelect" class="form-label">Space Layout Type</label>
+              <select id="spaceTypeSelect" class="host-select">
+                <option value="Indoor Banquet & Lawn">Indoor Banquet Hall + Outdoor Lawn</option>
+                <option value="Grand Indoor Ballroom">Grand Indoor Ballroom</option>
+                <option value="Open Rooftop Terrace">Open Rooftop Terrace</option>
+                <option value="Private Estate & Villa">Private Estate &amp; Pool Villa</option>
+                <option value="Natural Light Studio">Daylight Creative Studio</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="venueDescInput" class="form-label">Short Description</label>
+              <textarea 
+                id="venueDescInput" 
+                class="host-textarea" 
+                rows="3" 
+                placeholder="Describe your venue highlights, atmosphere, and amenities for organizers..."
+              >Breathtaking banquet estate featuring crystal chandeliers, open manicured lawns, and luxury bridal suites designed for royal wedding celebrations.</textarea>
+            </div>
+
+            <div class="wizard-footer-nav">
+              <div></div>
+              <button type="button" class="btn-wizard-next" id="btnNext1">Next: Location &rarr;</button>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="wizard-step-card" id="wizardStep2" style="display:none;">
+          <div class="wizard-card-header">
+            <span class="wizard-step-tag">Step 2</span>
+            <h2 class="wizard-heading">Where is your space located?</h2>
+            <p class="wizard-sub">Help event organizers discover your venue in their target city.</p>
+          </div>
+
+          <div class="wizard-form-body">
+            
+            <div class="form-group">
+              <label for="citySelect" class="form-label">City</label>
+              <select id="citySelect" class="host-select">
+                <option value="Ahmedabad" selected>Ahmedabad, Gujarat</option>
+                <option value="Gandhinagar">Gandhinagar, Gujarat</option>
+                <option value="Surat">Surat, Gujarat</option>
+                <option value="Rajkot">Rajkot, Gujarat</option>
+                <option value="Vadodara">Vadodara, Gujarat</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="addressInput" class="form-label">Full Street Address &amp; Landmark</label>
+              <input 
+                type="text" 
+                id="addressInput" 
+                class="host-input" 
+                placeholder="e.g., Near SG Highway, Bodakdev"
+                value="Near SG Highway, Bodakdev"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="neighborhoodInput" class="form-label">Approach &amp; Neighborhood Note</label>
+              <input 
+                type="text" 
+                id="neighborhoodInput" 
+                class="host-input" 
+                placeholder="e.g., Wide 4-lane approach road with easy bus access"
+                value="Wide 4-lane approach road with direct highway connectivity"
+              >
+            </div>
+
+            <div class="wizard-footer-nav">
+              <button type="button" class="btn-wizard-back" id="btnBack2">&larr; Back</button>
+              <button type="button" class="btn-wizard-next" id="btnNext2">Next: Capacity &amp; Amenities &rarr;</button>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="wizard-step-card" id="wizardStep3" style="display:none;">
+          <div class="wizard-card-header">
+            <span class="wizard-step-tag">Step 3</span>
+            <h2 class="wizard-heading">Capacity &amp; Amenities</h2>
+            <p class="wizard-sub">Specify how many guests you can comfortably host and your key facilities.</p>
+          </div>
+
+          <div class="wizard-form-body">
+            
+            <div class="form-group">
+              <label for="capacityInput" class="form-label">Maximum Guest Capacity</label>
+              <div class="capacity-input-wrap">
+                <input 
+                  type="number" 
+                  id="capacityInput" 
+                  class="host-input" 
+                  value="500" 
+                  min="20" 
+                  max="5000" 
+                  step="50"
+                  required
+                >
+                <span class="capacity-unit">Guests</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Select All Amenities Available</label>
+              <div class="amenities-toggle-grid">
+                
+                <label class="amenity-checkbox-chip is-checked">
+                  <input type="checkbox" value="Central Air Conditioning" checked>
+                  <span>❄️ Central Air Conditioning</span>
+                </label>
+
+                <label class="amenity-checkbox-chip is-checked">
+                  <input type="checkbox" value="Valet Parking (150+ Cars)" checked>
+                  <span>🚗 Free Valet Parking</span>
+                </label>
+
+                <label class="amenity-checkbox-chip is-checked">
+                  <input type="checkbox" value="High-Speed Wi-Fi" checked>
+                  <span>📶 High-Speed Wi-Fi</span>
+                </label>
+
+                <label class="amenity-checkbox-chip is-checked">
+                  <input type="checkbox" value="In-House Catering Setup" checked>
+                  <span>🍽️ Commercial Kitchen</span>
+                </label>
+
+                <label class="amenity-checkbox-chip is-checked">
+                  <input type="checkbox" value="100% DG Power Backup" checked>
+                  <span>⚡ 100% Power Backup</span>
+                </label>
+
+                <label class="amenity-checkbox-chip is-checked">
+                  <input type="checkbox" value="Bridal Suite Included" checked>
+                  <span>💄 AC Bridal Suite</span>
+                </label>
+
+                <label class="amenity-checkbox-chip">
+                  <input type="checkbox" value="Concert Sound & DJ Booth">
+                  <span>🎵 DJ Sound System</span>
+                </label>
+
+                <label class="amenity-checkbox-chip">
+                  <input type="checkbox" value="Swimming Pool Deck">
+                  <span>🏊 Swimming Pool</span>
+                </label>
+
+              </div>
+            </div>
+
+            <div class="wizard-footer-nav">
+              <button type="button" class="btn-wizard-back" id="btnBack3">&larr; Back</button>
+              <button type="button" class="btn-wizard-next" id="btnNext3">Next: Pricing &amp; Photos &rarr;</button>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="wizard-step-card" id="wizardStep4" style="display:none;">
+          <div class="wizard-card-header">
+            <span class="wizard-step-tag">Step 4</span>
+            <h2 class="wizard-heading">Pricing &amp; Venue Photos</h2>
+            <p class="wizard-sub">Set your daily rate, upload genuine photos of your space, and launch your venue live!</p>
+          </div>
+
+          <div class="wizard-form-body">
+            
+            <div class="form-group">
+              <label for="priceInput" class="form-label">Base Rental Price (per day in INR)</label>
+              <div class="price-input-wrap">
+                <span class="price-symbol">₹</span>
+                <input 
+                  type="number" 
+                  id="priceInput" 
+                  class="host-input" 
+                  value="35000" 
+                  min="5000" 
+                  step="1000"
+                  required
+                >
+                <span class="price-suffix">/ day</span>
+              </div>
+            </div>
+
+            <div class="form-group" id="photoUploadGroup">
+              <div class="upload-header-row">
+                <div>
+                  <label class="form-label">Upload Venue Photos</label>
+                  <p class="form-subtext">Add photos that showcase your venue's space, lighting, and layout. Your first uploaded photo is automatically set as the main cover photo.</p>
+                </div>
+                <span class="photo-counter-badge" id="photoCounterBadge">0 photos added</span>
+              </div>
+
+              <div class="photo-dropzone" id="photoDropZone">
+                <input 
+                  type="file" 
+                  id="venuePhotoFileInput" 
+                  class="file-input-hidden" 
+                  accept="image/png, image/jpeg, image/webp" 
+                  multiple
+                >
+                <div class="dropzone-content">
+                  <div class="dropzone-icon-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="upload-icon-svg">
+                      <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                      <circle cx="9" cy="9" r="2"/>
+                      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                    </svg>
+                  </div>
+                  <div class="dropzone-text-group">
+                    <strong class="dropzone-title">Drag &amp; drop photos here</strong>
+                    <span class="dropzone-sub">or <button type="button" class="btn-browse-photos" id="btnBrowsePhotos">browse from your computer</button></span>
+                  </div>
+                  <span class="dropzone-hint">Supports PNG, JPG, WEBP &bull; High resolution recommended</span>
+                </div>
+              </div>
+
+              <div class="uploaded-photos-grid" id="uploadedPhotosGrid" style="display: none;"></div>
+
+              <div class="sample-photos-row" id="samplePhotosRow">
+                <span class="sample-photos-hint">Testing or demonstrating this project?</span>
+                <button type="button" class="btn-sample-photos" id="btnLoadSamplePhotos">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  <span>Load 3 demo venue photos</span>
+                </button>
+              </div>
+
+              <div class="photo-error-msg" id="photoErrorMsg" style="display: none;">
+                ⚠️ Please upload at least 1 photo of your venue before publishing.
+              </div>
+            </div>
+
+            <div class="form-grid-two">
+              <div class="form-group">
+                <label for="hostNameInput" class="form-label">Host Full Name</label>
+                <input type="text" id="hostNameInput" class="host-input" placeholder="Your full name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="hostPhoneInput" class="form-label">Host Contact Phone</label>
+                <input type="tel" id="hostPhoneInput" class="host-input" placeholder="+91 98250 12345" required>
+              </div>
+            </div>
+
+            <div class="wizard-footer-nav">
+              <button type="button" class="btn-wizard-back" id="btnBack4">&larr; Back</button>
+              <button type="button" class="btn-publish-venue" id="btnPublishVenue">
+                <span>🚀 Submit Venue for Admin Approval</span>
+              </button>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="publish-success-card" id="publishSuccessCard" style="display:none;">
+          <div class="success-badge-icon">⏳</div>
+          <h2 class="success-heading">Submitted for Admin Approval!</h2>
+          <p class="success-sub">
+            Your space has been saved and submitted for Administrator review. It will go live for customer bookings automatically once approved by Admin.
+          </p>
+
+          <div class="published-summary-box">
+            <div class="published-row">
+              <span>Venue Title:</span>
+              <strong id="pubVenueTitle">-</strong>
+            </div>
+            <div class="published-row">
+              <span>Category &amp; City:</span>
+              <strong id="pubCategoryCity">-</strong>
+            </div>
+            <div class="published-row">
+              <span>Daily Rate:</span>
+              <strong id="pubPrice">-</strong>
+            </div>
+            <div class="published-row">
+              <span>Approval Status:</span>
+              <strong id="pubHost">-</strong>
+            </div>
+          </div>
+
+          <div class="published-action-buttons">
+            <a href="owner.html" class="btn btn-primary" id="btnViewLiveVenue">Track Approval in Owner Dashboard &rarr;</a>
+            <a href="../venues/venues.html?category=all" class="btn btn-outline">Browse Published Venues</a>
+          </div>
+        </section>
+
+      </div>
+
+      <aside class="host-preview-column">
+        <div class="preview-sticky-wrap">
+          <div class="preview-header-pill">
+            <span class="live-dot">●</span>
+            <span>Live Guest Preview</span>
+          </div>
+
+          <article class="preview-venue-card">
+            <div class="preview-img-box">
+              <img id="prevImg" src="../assets/venue-ballroom.jpg" alt="Preview venue" class="preview-photo">
+              <span class="preview-avail-badge">● Available</span>
+            </div>
+
+            <div class="preview-content-box">
+              <div class="preview-meta-row">
+                <span class="preview-category" id="prevCategory">Wedding Venue</span>
+                <span class="preview-rating">No rating</span>
+              </div>
+
+              <h3 class="preview-title" id="prevTitle">Your Venue Name</h3>
+              <span class="preview-location" id="prevLocation">City, Gujarat</span>
+              <span class="preview-capacity" id="prevCapacity">Guest capacity &bull; Space type</span>
+
+              <div class="preview-price-row">
+                <div>
+                  <span class="preview-price-amount" id="prevPrice">₹0</span>
+                  <span class="preview-price-sub">/ day</span>
+                </div>
+                <span class="preview-host-badge" id="prevHostBadge">Host</span>
+              </div>
+            </div>
+          </article>
+
+          <p class="preview-footnote">
+            This preview updates in real-time as you complete each step. Once published, your space will appear in all matching searches.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <script src="../oop/models.js"></script>
+  <script src="../oop/services.js"></script>
+
+  <script src="add-venue.js"></script>
+</body>
+</html>

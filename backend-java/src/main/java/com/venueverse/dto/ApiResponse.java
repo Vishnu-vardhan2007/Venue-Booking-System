@@ -1,0 +1,52 @@
+package com.venueverse.dto;
+
+public class ApiResponse {
+    private Boolean success;
+    private String status;
+    private String message;
+
+    public ApiResponse() {
+    }
+
+    public ApiResponse(Boolean success, String message) {
+        this.success = success;
+        this.message = message;
+    }
+
+    public ApiResponse(String status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+
+    public static ApiResponse success(String message) {
+        return new ApiResponse(true, message);
+    }
+
+    public static ApiResponse error(String message) {
+        return new ApiResponse(false, message);
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}

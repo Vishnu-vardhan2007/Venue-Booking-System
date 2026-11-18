@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 # Java compiled files
 *.class
 
 # Build folders
 bin/
 out/
+target/*.class
+*.exe
+bin/
+out/
 target/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
 
 # IDE files
 .idea/
@@ -13,3 +22,30 @@ target/
 # Operating system files
 .DS_Store
 Thumbs.db
+=======
+backend-java/target/
+*.class
+*.jar
+*.war
+*.exe
+*.out
+*.obj
+
+.vscode/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.DS_Store
+Thumbs.db
+
+*.log
+.env
+scratch/
+
+
+target/
+node_modules/
+
+>>>>>>> 5f38bcad12eecd485d4a9258b527ec31ff1de22a

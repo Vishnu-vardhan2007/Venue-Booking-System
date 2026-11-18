@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover and book premier venues for weddings, corporate events, parties, and celebrations. VenueVerse connects event organizers with unique spaces.">
+  <title>VenueVerse - Find & Book Unique Venues for Any Occasion</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      
+      <a href="index.html" class="brand-logo" aria-label="VenueVerse Home">
+        <span class="logo-icon-wrap">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18"/>
+            <path d="M5 21V7l8-4v18"/>
+            <path d="M19 21V11l-6-4"/>
+            <path d="M9 9h1"/>
+            <path d="M9 13h1"/>
+            <path d="M9 17h1"/>
+          </svg>
+        </span>
+        <span class="brand-text">Venue<span class="brand-accent">Verse</span></span>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="#explore" class="nav-link active">Explore</a></li>
+          <li><a href="#categories" class="nav-link">Categories</a></li>
+          <li><a href="#featuredVenues" class="nav-link">Venues</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="signin/signin.html" class="btn btn-primary">Sign In</a>
+        </div>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section" id="explore">
+      <div class="container hero-center-container">
+        
+        <div class="hero-badge" aria-label="Verified event spaces with zero booking fees">
+          <svg class="badge-shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <span class="badge-text-main">Verified Event Spaces</span>
+          <span class="badge-dot-sep">•</span>
+          <span class="badge-text-sub">Zero Booking Fees</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Find the Perfect Venue for <span class="highlight-text">Any Occasion</span>
+        </h1>
+
+        <p class="hero-description">
+          Discover extraordinary spaces for weddings, corporate meetings, private parties, and photo shoots with transparent pricing and instant booking.
+        </p>
+
+        <form class="search-card wide-search-card" id="venueSearchForm" action="#" method="GET" autocomplete="off">
+          
+          <div class="search-segment location-segment" id="locationSegment">
+            <label for="locationInput" class="segment-label">Location</label>
+            <div class="input-group">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <input 
+                type="text" 
+                id="locationInput" 
+                name="location" 
+                placeholder="Where are you looking?" 
+                autocomplete="off"
+              >
+            </div>
+
+            <div class="location-dropdown" id="locationDropdown" role="listbox" aria-label="Location suggestions">
+              <div class="dropdown-divider-title">Popular Cities</div>
+
+              <button type="button" class="dropdown-item city-choice" data-city="Ahmedabad">
+                <span class="dropdown-item-icon">🏙️</span>
+                <div class="item-text-group">
+                  <span class="item-main">Ahmedabad</span>
+                  <span class="item-sub">Banquets &amp; heritage spaces</span>
+                </div>
+              </button>
+
+              <button type="button" class="dropdown-item city-choice" data-city="Gandhinagar">
+                <span class="dropdown-item-icon">🌿</span>
+                <div class="item-text-group">
+                  <span class="item-main">Gandhinagar</span>
+                  <span class="item-sub">Lawns &amp; resorts</span>
+                </div>
+              </button>
+
+              <button type="button" class="dropdown-item city-choice" data-city="Surat">
+                <span class="dropdown-item-icon">🏛️</span>
+                <div class="item-text-group">
+                  <span class="item-main">Surat</span>
+                  <span class="item-sub">Convention &amp; party halls</span>
+                </div>
+              </button>
+
+              <button type="button" class="dropdown-item city-choice" data-city="Vadodara">
+                <span class="dropdown-item-icon">✨</span>
+                <div class="item-text-group">
+                  <span class="item-main">Vadodara</span>
+                  <span class="item-sub">Celebration venues</span>
+                </div>
+              </button>
+
+              <button type="button" class="dropdown-item city-choice" data-city="Rajkot">
+                <span class="dropdown-item-icon">🏰</span>
+                <div class="item-text-group">
+                  <span class="item-main">Rajkot</span>
+                  <span class="item-sub">Party plots &amp; halls</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div class="segment-divider" aria-hidden="true"></div>
+
+          <div class="search-segment">
+            <label for="eventTypeSelect" class="segment-label">Event Type</label>
+            <div class="input-group">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/>
+                <circle cx="7" cy="7" r=".5" fill="currentColor"/>
+              </svg>
+              <select id="eventTypeSelect" name="event_type" autocomplete="off">
+                <option value="all" selected>All Venues</option>
+                <option value="wedding">Wedding</option>
+                <option value="birthday">Birthday</option>
+                <option value="conference">Conference</option>
+                <option value="photoshoot">Photoshoot</option>
+                <option value="engagement">Engagement</option>
+                <option value="party">Party</option>
+                <option value="reception">Reception</option>
+                <option value="corporate">Corporate Event</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="segment-divider" aria-hidden="true"></div>
+
+          <div class="search-segment date-segment">
+            <label for="dateInput" class="segment-label">Event Date</label>
+            <div class="input-group">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <input 
+                type="date" 
+                id="dateInput" 
+                name="event_date"
+                aria-label="Event date"
+              >
+            </div>
+          </div>
+
+          <div class="segment-divider" aria-hidden="true"></div>
+
+          <div class="search-segment guests-segment">
+            <label for="guestsInput" class="segment-label">Guests</label>
+            <div class="input-group">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              <input 
+                type="number" 
+                id="guestsInput" 
+                name="guests" 
+                placeholder="Number of guests" 
+                min="1" 
+                max="2000"
+              >
+            </div>
+          </div>
+
+          <button type="submit" class="btn-search" id="searchSubmitBtn" aria-label="Search venues">
+            <svg class="search-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.3-4.3"/>
+            </svg>
+            <span>Search</span>
+          </button>
+        </form>
+
+        <div class="quick-tags-container">
+          <span class="tags-title">Popular searches:</span>
+          <div class="tags-list">
+            <button type="button" class="tag-chip" data-category="wedding">💍 Weddings</button>
+            <button type="button" class="tag-chip" data-category="corporate">💼 Corporate</button>
+            <button type="button" class="tag-chip" data-category="birthday">🎉 Birthdays</button>
+            <button type="button" class="tag-chip" data-category="photoshoot">📸 Photo Shoots</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section categories-section" id="categories">
+      <div class="container">
+        
+        <div class="section-header-compact">
+          <div class="header-titles">
+            <span class="sub-label">EXPLORE BY OCCASION</span>
+            <h2 class="compact-title">Popular Categories</h2>
+          </div>
+          <a href="venues/venues.html?category=all" class="view-all-link">
+            <span>View All</span>
+            <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="categories-photo-grid">
+          
+          <div class="cat-photo-card" data-category="wedding" role="button" tabindex="0">
+            <div class="cat-img-box">
+              <img src="assets/cat-wedding.jpg" alt="Wedding banquet hall with round tables and chandeliers" class="cat-photo" loading="lazy">
+            </div>
+            <div class="cat-floating-icon">
+              <svg class="cat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="14" r="7"/>
+                <polygon points="12 3 15 7 9 7 12 3"/>
+              </svg>
+            </div>
+            <div class="cat-content-box cat-tint-wedding">
+              <h3 class="cat-title">Wedding</h3>
+              <p class="cat-desc">Beautiful spaces for your special day</p>
+              <div class="cat-arrow-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-photo-card" data-category="birthday" role="button" tabindex="0">
+            <div class="cat-img-box">
+              <img src="assets/cat-birthday.jpg" alt="Scenic coastal party celebration terrace" class="cat-photo" loading="lazy">
+            </div>
+            <div class="cat-floating-icon">
+              <svg class="cat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/>
+                <path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/>
+                <path d="M2 21h20"/>
+                <line x1="12" y1="7" x2="12" y2="11"/>
+              </svg>
+            </div>
+            <div class="cat-content-box cat-tint-birthday">
+              <h3 class="cat-title">Birthday</h3>
+              <p class="cat-desc">Celebrate with the people you love</p>
+              <div class="cat-arrow-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-photo-card" data-category="conference" role="button" tabindex="0">
+            <div class="cat-img-box">
+              <img src="assets/cat-conference.jpg" alt="Modern corporate conference hall presentation" class="cat-photo" loading="lazy">
+            </div>
+            <div class="cat-floating-icon">
+              <svg class="cat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="cat-content-box cat-tint-conference">
+              <h3 class="cat-title">Conference</h3>
+              <p class="cat-desc">Professional spaces for bigger ideas</p>
+              <div class="cat-arrow-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-photo-card" data-category="photoshoot" role="button" tabindex="0">
+            <div class="cat-img-box">
+              <img src="assets/cat-photoshoot.jpg" alt="Creative photoshoot loft studio with lights and equipment" class="cat-photo" loading="lazy">
+            </div>
+            <div class="cat-floating-icon">
+              <svg class="cat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </div>
+            <div class="cat-content-box cat-tint-photoshoot">
+              <h3 class="cat-title">Photoshoot</h3>
+              <p class="cat-desc">Picture perfect locations</p>
+              <div class="cat-arrow-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section featured-section" id="featuredVenues">
+      <div class="container">
+        
+        <div class="section-header-compact">
+          <div class="header-titles">
+            <h2 class="compact-title">Featured Venues</h2>
+          </div>
+          <a href="venues/venues.html?category=all" class="view-all-link">
+            <span>View All</span>
+            <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="featured-four-grid" id="featuredVenuesGrid">
+          <div style="grid-column: 1 / -1; text-align:center; padding:40px 20px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:16px; color:#64748b;">
+            <p style="font-size:1rem; font-weight:600; color:#0f172a; margin-bottom:6px;">No venues added yet</p>
+            <p style="font-size:0.88rem; margin-bottom:0;">Venues added by hosts will appear here once published.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section host-banner-section" id="hostBanner">
+      <div class="container">
+        <div class="host-banner-card">
+          
+          <div class="host-banner-content">
+            <span class="host-banner-kicker">ARE YOU A VENUE OWNER?</span>
+            <h2 class="host-banner-title">List Your Venue and Reach More Customers</h2>
+            <p class="host-banner-text">
+              Join thousands of venue owners and grow your business with us. Monetize your space with zero upfront fees and full calendar control.
+            </p>
+            <a href="signin/signin.html?tab=signup&role=host" class="btn btn-primary btn-host-cta">
+              Register as a Host
+              <svg class="btn-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <div class="host-banner-visual">
+            <div class="host-image-frame">
+              <img 
+                src="assets/host-banner.jpg" 
+                alt="Friendly venue host welcoming event organizers to a sunny loft" 
+                class="host-cover-photo" 
+                loading="lazy"
+              >
+              
+              <div class="host-stats-pill">
+                <div class="stat-pill-item">
+                  <span class="stat-pill-icon">👥</span>
+                  <div class="stat-pill-info">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-text">Happy Customers</span>
+                  </div>
+                </div>
+                <div class="stat-pill-divider" aria-hidden="true"></div>
+                <div class="stat-pill-item">
+                  <span class="stat-pill-icon">🏨</span>
+                  <div class="stat-pill-info">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-text">Venues Listed</span>
+                  </div>
+                </div>
+                <div class="stat-pill-divider" aria-hidden="true"></div>
+                <div class="stat-pill-item">
+                  <span class="stat-pill-icon">⭐</span>
+                  <div class="stat-pill-info">
+                    <span class="stat-number">4.8</span>
+                    <span class="stat-text">Average Rating</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section how-it-works-section" id="how-it-works">
+      <div class="container">
+        
+        <div class="how-header">
+          <h2 class="how-title">How It Works</h2>
+          <p class="how-subtitle">Book your dream venue in just a few simple steps</p>
+        </div>
+
+        <div class="how-steps-flow">
+          
+          <div class="how-step-card">
+            <div class="step-icon-bubble step-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            <h3 class="step-card-title">1. Search</h3>
+            <p class="step-card-desc">Find venues based on your location, date and preferences.</p>
+          </div>
+
+          <div class="step-arrow-connector" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+
+          <div class="how-step-card">
+            <div class="step-icon-bubble step-indigo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </div>
+            <h3 class="step-card-title">2. Compare</h3>
+            <p class="step-card-desc">Explore options, check details and compare prices.</p>
+          </div>
+
+          <div class="step-arrow-connector" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+
+          <div class="how-step-card">
+            <div class="step-icon-bubble step-emerald">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+                <path d="m9 16 2 2 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="step-card-title">3. Book</h3>
+            <p class="step-card-desc">Confirm your booking and get ready for your event.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section reviews-section" id="reviews">
+      <div class="container">
+        
+        <div class="reviews-header">
+          <span class="sub-label">TESTIMONIALS</span>
+          <h2 class="reviews-title">Top Rated Reviews</h2>
+          <p class="reviews-subtitle">Genuine feedback shared by guests across VenueVerse venues</p>
+        </div>
+
+        <div class="reviews-carousel-wrapper" id="reviewsWrapper">
+          
+          <button type="button" class="carousel-arrow carousel-arrow-prev" id="reviewPrevBtn" aria-label="Previous reviews">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="reviews-carousel-viewport" id="reviewsCarousel">
+            <div class="reviews-track" id="reviewsTrack">
+              <div style="width:100%; text-align:center; padding:32px 20px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:16px; color:#64748b;">
+                Loading top-rated guest reviews...
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="carousel-arrow carousel-arrow-next" id="reviewNextBtn" aria-label="Next reviews">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+        </div>
+
+        <div class="carousel-dots" id="carouselDots" aria-label="Review pagination"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter">
+    <div class="container footer-container">
+      
+      <div class="footer-grid">
+        
+        <div class="footer-col footer-col-brand">
+          <a href="index.html" class="footer-logo">
+            <span class="footer-logo-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18"/>
+                <path d="M5 21V7l8-4v18"/>
+                <path d="M19 21V11l-6-4"/>
+                <path d="M9 9h1"/>
+                <path d="M9 13h1"/>
+                <path d="M9 17h1"/>
+              </svg>
+            </span>
+            <span class="footer-brand-name">Venue<span class="footer-brand-accent">Verse</span></span>
+          </a>
+          <p class="footer-tagline">
+            Your one-stop platform for finding and booking the perfect venue for any occasion. Verified spaces, direct host communication, and transparent pricing.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="X Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect width="4" height="12" x="2" y="9"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul class="footer-link-list">
+            <li><a href="#explore">Explore Venues</a></li>
+            <li><a href="#categories">Popular Categories</a></li>
+            <li><a href="#featuredVenues">Featured Spaces</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#hostBanner">List Your Venue</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading">Support &amp; Trust</h3>
+          <ul class="footer-link-list">
+            <li><a href="support.html#help-center">Help Center</a></li>
+            <li><a href="support.html#safety-guidelines">Safety Guidelines</a></li>
+            <li><a href="support.html#cancellation-policy">Cancellation Policy</a></li>
+            <li><a href="support.html#privacy-policy">Privacy Policy</a></li>
+            <li><a href="support.html#terms-conditions">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading">Contact Us</h3>
+          <ul class="footer-contact-list">
+            <li class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              <span>support@venueverse.com</span>
+            </li>
+            <li class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>+91 8374310939</span>
+            </li>
+            <li class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>GR5 chiloda Gandhinagar</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-row">
+        <p class="copyright-text">
+          &copy; 2026 VenueVerse. All rights reserved.
+        </p>
+        <!-- <p class="project-credit-text">
+          College Web Development Project &bull; Built with Semantic HTML5 &amp; CSS3
+        </p> -->
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="auth-nav.js"></script>
+</body>
+</html>

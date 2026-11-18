@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VenueVerse - Sign In &amp; Sign Up</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .form-section {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800 font-sans antialiased overflow-hidden h-screen w-full flex">
+
+    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-3 w-80 max-w-[90vw] pointer-events-none"></div>
+
+    <div class="w-full lg:w-[45%] h-full overflow-y-auto flex flex-col relative bg-white z-10 shadow-2xl lg:shadow-none">
+        
+        <div class="flex-1 flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-20 py-12 max-w-2xl mx-auto w-full">
+            
+            <a href="../index.html" class="flex items-center gap-2 text-2xl font-bold text-navy-900 mb-8 hover:opacity-90 transition-opacity">
+                <div class="w-10 h-10 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center">
+                    <i class="ph-fill ph-buildings text-2xl"></i>
+                </div>
+                <span>Venue<span class="text-primary-600">Verse</span></span>
+            </a>
+
+            <div class="bg-slate-100 p-1 rounded-xl flex items-center mb-8 relative w-full sm:w-max">
+                <div id="tab-indicator" class="absolute h-[calc(100%-8px)] top-1 left-1 bg-white shadow-sm rounded-lg transition-all duration-300 ease-out w-[calc(50%-4px)]"></div>
+                <button onclick="switchTab('signin')" id="tab-signin" class="relative z-10 flex-1 sm:w-32 py-2.5 text-sm font-medium text-navy-900 transition-colors">Log In</button>
+                <button onclick="switchTab('signup')" id="tab-signup" class="relative z-10 flex-1 sm:w-32 py-2.5 text-sm font-medium text-slate-500 transition-colors">Sign Up</button>
+            </div>
+
+            <div id="signin-section" class="form-section block animate-slide-up">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-navy-900 mb-2">Welcome Back</h1>
+                    <p class="text-slate-500">Sign in to discover and book your perfect venue.</p>
+                </div>
+
+                <form onsubmit="handleSignIn(event)" class="space-y-5">
+                    
+                    <div>
+                        <label for="signin-email" class="block text-sm font-medium text-navy-900 mb-1.5">Email Address</label>
+                        <div class="relative">
+                            <i class="ph ph-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                            <input type="email" id="signin-email" required placeholder="name@company.com" 
+                                class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-50 transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="signin-password" class="block text-sm font-medium text-navy-900 mb-1.5">Password</label>
+                        <div class="relative">
+                            <i class="ph ph-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                            <input type="password" id="signin-password" required placeholder="Enter your password" 
+                                class="w-full pl-10 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-50 transition-all">
+                            <button type="button" onclick="togglePassword('signin-password', 'signin-eye')" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
+                                <i class="ph ph-eye text-lg" id="signin-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-1">
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <div class="relative flex items-center justify-center w-5 h-5">
+                                <input type="checkbox" class="peer appearance-none w-5 h-5 border border-slate-300 rounded md bg-white checked:bg-primary-600 checked:border-primary-600 transition-all cursor-pointer">
+                                <i class="ph-bold ph-check absolute text-white opacity-0 peer-checked:opacity-100 text-xs pointer-events-none"></i>
+                            </div>
+                            <span class="text-sm text-slate-600 group-hover:text-navy-900 transition-colors">Remember me</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-primary-600/20 mt-4 flex justify-center items-center gap-2">
+                        Sign In
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div id="signup-section" class="form-section hidden opacity-0">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-navy-900 mb-2">Create an Account</h1>
+                    <p class="text-slate-500">Sign up to discover, compare, and book extraordinary spaces.</p>
+                </div>
+
+                <form onsubmit="handleSignUp(event)" class="space-y-5">
+                    
+                    <div>
+                        <label for="signup-name" class="block text-sm font-medium text-navy-900 mb-1.5">Full Name</label>
+                        <div class="relative">
+                            <i class="ph ph-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                            <input type="text" id="signup-name" required placeholder="John Doe" 
+                                class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-50 transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="signup-email" class="block text-sm font-medium text-navy-900 mb-1.5">Email Address</label>
+                        <div class="relative">
+                            <i class="ph ph-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                            <input type="email" id="signup-email" required placeholder="name@company.com" 
+                                class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-50 transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="signup-password" class="block text-sm font-medium text-navy-900 mb-1.5">Create Password</label>
+                        <div class="relative">
+                            <i class="ph ph-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                            <input type="password" id="signup-password" required placeholder="Min. 8 characters" oninput="checkPasswordStrength(this.value)"
+                                class="w-full pl-10 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-50 transition-all">
+                            <button type="button" onclick="togglePassword('signup-password', 'signup-eye')" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
+                                <i class="ph ph-eye text-lg" id="signup-eye"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="mt-2.5 flex items-center gap-1.5">
+                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                <div id="strength-bar-1" class="h-full w-0 transition-all duration-300"></div>
+                            </div>
+                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                <div id="strength-bar-2" class="h-full w-0 transition-all duration-300"></div>
+                            </div>
+                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                <div id="strength-bar-3" class="h-full w-0 transition-all duration-300"></div>
+                            </div>
+                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                <div id="strength-bar-4" class="h-full w-0 transition-all duration-300"></div>
+                            </div>
+                        </div>
+                        <p id="strength-text" class="text-xs text-slate-500 mt-1.5 text-right">Password strength</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-navy-900 mb-2">Account Type <span class="text-primary-600 font-normal">(Choose how you will use VenueVerse)</span></label>
+                        <div class="grid grid-cols-2 gap-3" id="account-type-grid">
+                            <label class="account-type-option cursor-pointer relative flex flex-col p-3.5 border-2 border-primary-600 bg-primary-50/60 rounded-xl transition-all shadow-sm" id="opt-user-card">
+                                <input type="radio" name="accountType" value="user" checked class="sr-only" onchange="selectAccountType('user')">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <i class="ph-bold ph-calendar-check text-primary-600 text-lg" id="opt-user-icon"></i>
+                                    <span class="text-sm font-bold text-navy-900" id="opt-user-title">User</span>
+                                </div>
+                                <span class="text-xs text-slate-500 leading-tight">Browse &amp; book venues</span>
+                            </label>
+                            
+                            <label class="account-type-option cursor-pointer relative flex flex-col p-3.5 border border-slate-200 bg-slate-50/50 rounded-xl transition-all hover:bg-slate-50" id="opt-host-card">
+                                <input type="radio" name="accountType" value="host" class="sr-only" onchange="selectAccountType('host')">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <i class="ph-bold ph-buildings text-slate-400 text-lg" id="opt-host-icon"></i>
+                                    <span class="text-sm font-bold text-slate-700" id="opt-host-title">Venue Host</span>
+                                </div>
+                                <span class="text-xs text-slate-500 leading-tight">List spaces &amp; manage bookings</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="signup-phone" class="block text-sm font-medium text-navy-900 mb-1.5">Phone Number <span class="text-slate-400 font-normal">(Optional)</span></label>
+                        <div class="relative">
+                            <i class="ph ph-phone absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                            <input type="tel" id="signup-phone" placeholder="+91 98765 43210" 
+                                class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-50 transition-all">
+                        </div>
+                    </div>
+
+                    <div class="pt-1">
+                        <label class="flex items-start gap-2.5 cursor-pointer group">
+                            <div class="relative flex items-center justify-center w-5 h-5 mt-0.5 shrink-0">
+                                <input type="checkbox" required class="peer appearance-none w-5 h-5 border border-slate-300 rounded md bg-white checked:bg-primary-600 checked:border-primary-600 transition-all cursor-pointer">
+                                <i class="ph-bold ph-check absolute text-white opacity-0 peer-checked:opacity-100 text-xs pointer-events-none"></i>
+                            </div>
+                            <span class="text-sm text-slate-600 leading-tight">
+                                I agree to VenueVerse's 
+                                <a href="../support.html#terms-conditions" class="text-primary-600 hover:underline">Terms of Service</a> and 
+                                <a href="../support.html#privacy-policy" class="text-primary-600 hover:underline">Privacy Policy</a>.
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="btn-submit-signup" class="w-full bg-navy-900 hover:bg-black text-white font-medium py-3 rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-navy-900/20 mt-2 flex justify-center items-center gap-2">
+                        <span>Register as User</span>
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="mt-auto pt-10 text-center text-xs text-slate-400">
+                &copy; 2026 VenueVerse Inc. All rights reserved.
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="hidden lg:flex lg:w-[55%] relative overflow-hidden bg-navy-900">
+        
+        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=2000" 
+             alt="Elegant Event Venue" 
+             class="absolute inset-0 w-full h-full object-cover object-center scale-105" />
+             
+        <div class="absolute inset-0 bg-gradient-to-br from-navy-900/90 via-navy-900/60 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-transparent to-transparent opacity-80"></div>
+
+        <div class="relative z-10 flex flex-col h-full justify-end p-16 xl:p-24 w-full">
+            <div class="max-w-xl animate-slide-up">
+                <h2 class="text-4xl xl:text-5xl font-bold text-white leading-tight mb-6">
+                    Every Great Event Starts With the Perfect Venue.
+                </h2>
+                <p class="text-lg text-slate-300 leading-relaxed mb-4">
+                    Discover, compare, and book extraordinary spaces for weddings, celebrations, corporate meetings, and special moments.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>        function switchTab(tab) {
+            const signinSection = document.getElementById('signin-section');
+            const signupSection = document.getElementById('signup-section');
+            const indicator = document.getElementById('tab-indicator');
+            const tabSignin = document.getElementById('tab-signin');
+            const tabSignup = document.getElementById('tab-signup');
+
+            if (tab === 'signin') {
+                indicator.style.transform = 'translateX(0)';
+                tabSignin.classList.replace('text-slate-500', 'text-navy-900');
+                tabSignup.classList.replace('text-navy-900', 'text-slate-500');
+                
+                signupSection.classList.remove('animate-slide-up');
+                signupSection.classList.add('hidden', 'opacity-0');
+                
+                signinSection.classList.remove('hidden', 'opacity-0');
+                signinSection.classList.add('animate-slide-up');
+            } else {
+                indicator.style.transform = 'translateX(100%)';
+                tabSignup.classList.replace('text-slate-500', 'text-navy-900');
+                tabSignin.classList.replace('text-navy-900', 'text-slate-500');
+                
+                signinSection.classList.remove('animate-slide-up');
+                signinSection.classList.add('hidden', 'opacity-0');
+                
+                signupSection.classList.remove('hidden', 'opacity-0');
+                signupSection.classList.add('animate-slide-up');
+            }
+        }
+
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('ph-eye', 'ph-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('ph-eye-slash', 'ph-eye');
+            }
+        }
+
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            if (password.length >= 8) strength += 1;
+            if (password.match(/[A-Z]/)) strength += 1;
+            if (password.match(/[0-9]/)) strength += 1;
+            if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
+
+            const bars = [
+                document.getElementById('strength-bar-1'),
+                document.getElementById('strength-bar-2'),
+                document.getElementById('strength-bar-3'),
+                document.getElementById('strength-bar-4')
+            ];
+            const text = document.getElementById('strength-text');
+
+            bars.forEach(bar => { bar.style.width = '0'; bar.className = 'h-full w-0 transition-all duration-300'; });
+
+            if (password.length === 0) {
+                text.textContent = "Password strength";
+                text.className = "text-xs text-slate-500 mt-1.5 text-right";
+                return;
+            }
+
+            if (strength >= 1) { bars[0].style.width = '100%'; bars[0].classList.add('bg-red-500'); text.textContent = "Weak"; text.className = "text-xs text-red-500 mt-1.5 text-right"; }
+            if (strength >= 2) { bars[1].style.width = '100%'; bars[0].classList.replace('bg-red-500', 'bg-yellow-500'); bars[1].classList.add('bg-yellow-500'); text.textContent = "Fair"; text.className = "text-xs text-yellow-500 mt-1.5 text-right"; }
+            if (strength >= 3) { bars[2].style.width = '100%'; bars[0].classList.replace('bg-yellow-500', 'bg-blue-500'); bars[1].classList.replace('bg-yellow-500', 'bg-blue-500'); bars[2].classList.add('bg-blue-500'); text.textContent = "Good"; text.className = "text-xs text-blue-500 mt-1.5 text-right"; }
+            if (strength >= 4) { bars[3].style.width = '100%'; bars.forEach(b => { b.classList.remove('bg-red-500', 'bg-yellow-500', 'bg-blue-500'); b.classList.add('bg-green-500'); }); text.textContent = "Strong"; text.className = "text-xs text-green-500 mt-1.5 text-right"; }
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-blue-50 border-blue-200 text-blue-800';
+            const icon = type === 'success' ? '<i class="ph-fill ph-check-circle text-green-500 text-xl"></i>' : '<i class="ph-fill ph-info text-blue-500 text-xl"></i>';
+
+            toast.className = `flex items-center gap-3 p-4 rounded-xl border shadow-lg transform transition-all duration-300 translate-x-full opacity-0 ${bgColor}`;
+            toast.innerHTML = `
+                ${icon}
+                <p class="text-sm font-medium">${message}</p>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function getReturnUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('returnUrl') || '../index.html';
+        }
+
+        function selectAccountType(role) {
+            const userCard = document.getElementById('opt-user-card');
+            const hostCard = document.getElementById('opt-host-card');
+            const userIcon = document.getElementById('opt-user-icon');
+            const hostIcon = document.getElementById('opt-host-icon');
+            const userTitle = document.getElementById('opt-user-title');
+            const hostTitle = document.getElementById('opt-host-title');
+            const submitBtn = document.getElementById('btn-submit-signup');
+
+            if (role === 'host') {
+                const hostRadio = document.querySelector('input[name="accountType"][value="host"]');
+                if (hostRadio) hostRadio.checked = true;
+
+                if (hostCard) hostCard.className = 'account-type-option cursor-pointer relative flex flex-col p-3.5 border-2 border-primary-600 bg-primary-50/60 rounded-xl transition-all shadow-sm';
+                if (userCard) userCard.className = 'account-type-option cursor-pointer relative flex flex-col p-3.5 border border-slate-200 bg-slate-50/50 rounded-xl transition-all hover:bg-slate-50';
+
+                if (hostIcon) hostIcon.className = 'ph-bold ph-buildings text-primary-600 text-lg';
+                if (userIcon) userIcon.className = 'ph-bold ph-calendar-check text-slate-400 text-lg';
+
+                if (hostTitle) hostTitle.className = 'text-sm font-bold text-navy-900';
+                if (userTitle) userTitle.className = 'text-sm font-bold text-slate-700';
+
+                if (submitBtn) {
+                    submitBtn.querySelector('span').textContent = 'Register as Venue Host';
+                }
+            } else {
+                const userRadio = document.querySelector('input[name="accountType"][value="user"]');
+                if (userRadio) userRadio.checked = true;
+
+                if (userCard) userCard.className = 'account-type-option cursor-pointer relative flex flex-col p-3.5 border-2 border-primary-600 bg-primary-50/60 rounded-xl transition-all shadow-sm';
+                if (hostCard) hostCard.className = 'account-type-option cursor-pointer relative flex flex-col p-3.5 border border-slate-200 bg-slate-50/50 rounded-xl transition-all hover:bg-slate-50';
+
+                if (userIcon) userIcon.className = 'ph-bold ph-calendar-check text-primary-600 text-lg';
+                if (hostIcon) hostIcon.className = 'ph-bold ph-buildings text-slate-400 text-lg';
+
+                if (userTitle) userTitle.className = 'text-sm font-bold text-navy-900';
+                if (hostTitle) hostTitle.className = 'text-sm font-bold text-slate-700';
+
+                if (submitBtn) {
+                    submitBtn.querySelector('span').textContent = 'Register as User';
+                }
+            }
+        }
+
+        function getReturnUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('returnUrl') || '../index.html';
+        }
+
+        function saveSessionAndRedirect(user, message) {
+            try {
+                sessionStorage.setItem('venueverse_user', JSON.stringify(user));
+                localStorage.setItem('venueverse_user', JSON.stringify(user));
+            } catch (err) {
+                console.warn('Could not save user:', err);
+            }
+            showToast(message, 'success');
+            setTimeout(() => {
+                const returnUrl = getReturnUrl();
+                if (returnUrl && returnUrl !== '../index.html' && !returnUrl.endsWith('/')) {
+                    window.location.href = returnUrl;
+                    return;
+                }
+                const activeRole = (user.backendRole || user.role || '').toLowerCase();
+                if (activeRole === 'host' || activeRole.includes('host') || activeRole.includes('organizer') || activeRole === 'venue_owner' || activeRole === 'owner') {
+                    window.location.href = '../owner-dashboard/owner.html';
+                } else if (activeRole === 'admin') {
+                    window.location.href = '../admin-dashboard/admin.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            }, 600);
+        }
+
+        async function handleSignIn(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('signin-email');
+            const passInput = document.getElementById('signin-password');
+            const email = (emailInput ? emailInput.value : '').trim();
+            const password = passInput ? passInput.value : '';
+
+            if (!email || !password) {
+                showToast('Please enter both email and password.', 'error');
+                return;
+            }
+
+            const apiBase = (window.location.hostname === '127.0.0.1') ? 'http://127.0.0.1:5000' : 'http://localhost:5000';
+            try {
+                const res = await fetch(`${apiBase}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (res.ok && data.success && data.user) {
+                    const u = data.user;
+                    const initials = u.name ? u.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() : 'U';
+                    const cleanRole = (u.role || 'user').toLowerCase();
+                    const user = {
+                        _id: u.id || u._id,
+                        name: u.name,
+                        email: u.email,
+                        role: cleanRole,
+                        backendRole: cleanRole,
+                        displayRole: cleanRole === 'host' ? 'Venue Owner' : (cleanRole === 'admin' ? 'Administrator' : 'Member'),
+                        initials: initials
+                    };
+                    saveSessionAndRedirect(user, `Welcome back, ${u.name}! Redirecting...`);
+                } else {
+                    showToast(data.message || 'Invalid email or password.', 'error');
+                }
+            } catch (err) {
+                console.error('Login error:', err);
+                showToast('Cannot connect to backend server. Make sure Java backend is running on port 5000!', 'error');
+            }
+        }
+
+        async function handleSignUp(e) {
+            e.preventDefault();
+            const name = (document.getElementById('signup-name').value || '').trim();
+            const email = (document.getElementById('signup-email').value || '').trim();
+            const password = document.getElementById('signup-password').value;
+            const phone = (document.getElementById('signup-phone')?.value || '').trim();
+
+            let role = 'user';
+            const roleInput = document.querySelector('input[name="accountType"]:checked');
+            if (roleInput && roleInput.value) {
+                role = roleInput.value;
+            }
+
+            if (!name || !email || !password) {
+                showToast('Name, email, and password are required.', 'error');
+                return;
+            }
+
+            const apiBase = (window.location.hostname === '127.0.0.1') ? 'http://127.0.0.1:5000' : 'http://localhost:5000';
+            try {
+                const payload = { name, email, password, role };
+                if (phone) payload.phone = phone;
+
+                const res = await fetch(`${apiBase}/api/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (res.ok && data.success && data.user) {
+                    const u = data.user;
+                    const initials = u.name ? u.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() : 'U';
+                    const cleanRole = (u.role || role || 'user').toLowerCase();
+                    const user = {
+                        _id: u.id || u._id,
+                        name: u.name,
+                        email: u.email,
+                        role: cleanRole,
+                        backendRole: cleanRole,
+                        displayRole: cleanRole === 'host' ? 'Venue Owner' : (cleanRole === 'admin' ? 'Administrator' : 'Member'),
+                        initials: initials
+                    };
+                    saveSessionAndRedirect(user, `Account registered as ${cleanRole === 'host' ? 'Venue Host' : 'User'}! Redirecting...`);
+                } else {
+                    showToast(data.message || 'Registration failed.', 'error');
+                }
+            } catch (err) {
+                console.error('Registration error:', err);
+                showToast('Cannot connect to backend server. Make sure Java backend is running on port 5000!', 'error');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('tab') === 'signup') {
+                switchTab('signup');
+            }
+            if (params.get('role') === 'host') {
+                selectAccountType('host');
+            }
+        });
+    </script>
+</body>
+</html>
