@@ -1,0 +1,5 @@
+U-001,Aditi Sharma,aditi@gmail.com,Customer,+919876543210,pass123
+U-002,Aarav Mehta,aarav@venueverse.com,Customer,+919811223344,pass123
+O-001,Ramesh Shah,ramesh@venueverse.com,VenueOwner,LIC-GJ-2026-901,host123
+U-003,Bhanu,bhanu@gmail.com,Customer,8374338928,Bhanu@8374339109
+U-004,Vishnu,vishnu@gmail.com,Customer,99999999999,Vishnu@143
